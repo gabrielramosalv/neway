@@ -2,8 +2,8 @@
     <article class="user-card flex align-i-center gap-1">
         <div class="user-card__photo"></div>
         <div class="flex column align-i-start">
-            <h3 class="user-card__name">Roberto Carlos</h3>
-            <span class="user-card__nickname">@roberto</span>
+            <h3 class="user-card__name">{{ name }}</h3>
+            <span class="user-card__nickname">{{ nickname }}</span>
         </div>
     </article>
 </template>
@@ -23,7 +23,7 @@
     transform: scale(0.97);
 }
 
-.user-card__name  {
+.user-card__name {
     font-size: 1em;
     font-weight: 600;
 }
@@ -48,6 +48,10 @@
 
 <script>
 export default {
-
+    name: "UserCard",
+    props: {
+        name: String,
+        nickname: String
+    }
 }
 </script>

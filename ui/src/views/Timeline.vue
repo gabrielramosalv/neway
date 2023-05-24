@@ -5,6 +5,9 @@
             <LeftBar/>
 
             <section class="timeline__main__posts flex column gap-2">
+                <div class="timeline__main__search-container">
+                    <input type="search" class="timeline__main__search width-full">
+                </div>
                 <Post/>
                 <Post/>
                 <Post/>
@@ -32,7 +35,21 @@
 }
 
 .timeline__main__posts {
-    padding: var(--ratio-2);
+    padding: var(--ratio-1);
+}
+
+.timeline__main__search-container {
+    position: sticky;
+    top: -1px;
+    background: white;
+    padding: var(--ratio-1) 0;
+}
+
+.timeline__main__search {
+    border-radius: var(--rounded-2);
+    padding: var(--ratio-1) var(--ratio-2);
+    background-color: white;
+    border: 2px solid var(--color-grey-1);
 }
 
 </style>
