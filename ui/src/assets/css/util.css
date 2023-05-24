@@ -1,0 +1,35 @@
+.flex {
+    display: flex;
+}
+
+.row {
+    flex-direction: row;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.justify-c-center {
+    justify-content: center;
+}
+
+.align-i-center {
+    align-items: center;
+}
+
+.align-i-start {
+    align-items: flex-start;
+}
+
+.gap-1 {
+    gap: var(--ratio-1);
+}
+
+.gap-2 {
+    gap: var(--ratio-2);
+}
+
+.width-full {
+    width: 100%;
+}
