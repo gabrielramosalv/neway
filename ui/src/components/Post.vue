@@ -12,12 +12,13 @@
 
         </div>
 
-        <footer class="width-full">
+        <footer class="flex row align-i-center justify-c-between width-full">
             <div class="flex gap-1">
-                <div class="post__footer__button"></div>
-                <div class="post__footer__button"></div>
-                <div class="post__footer__button"></div>
+                <div class="post__interaction"></div>
+                <div class="post__interaction"></div>
+                <div class="post__interaction"></div>
             </div>
+            <span class="post__date bold">25/05/2023 14:00</span>
         </footer>
 
         <div class="post__caption flex">
@@ -67,20 +68,24 @@
 }
 
 .post__caption {
-    gap: calc(var(--ratio-1)*0.7);
+    gap: calc(var(--ratio-1) * 0.7);
 }
 
 .post__caption__username {
     font-weight: 600;
 }
 
-.post__footer__button {
+.post__interaction {
     height: 35px;
     width: 35px;
     background-color: var(--color-grey-1);
     border-radius: 100%;
 }
 
+.post__date {
+    color: var(--color-text-aside-1);
+    font-size: 0.9em;
+}
 
 </style>
 

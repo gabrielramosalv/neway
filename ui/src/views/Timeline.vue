@@ -4,15 +4,27 @@
         <main class="timeline__main flex justify-c-center gap-2">
             <LeftBar/>
 
-            <section class="timeline__main__posts flex column gap-2">
-                <div class="timeline__main__search-container">
-                    <input type="search" class="timeline__main__search width-full">
+            <section class="timeline__main__posts flex row align-i-start justify-c-between gap-2">
+                <div class="timeline__main__posts__controller">
                 </div>
-                <Post/>
-                <Post/>
-                <Post/>
+                <div class="flex column gap-2">
+                    <Post/>
+                    <Post/>
+                    <Post/>
+                </div>
+                <div class="timeline__main__posts__controller">
+                    <div class="flex column align-i-center gap-0_1">
+                        <button class="timeline__main__posts__create">
+                            <Popup title="Criar publicação">
+                                <template v-slot:content>
+                                    
+                                </template>
+                            </Popup>
+                        </button>
+                        <span class="user-select-none bold">Criar</span>
+                    </div>
+                </div>
             </section>
-
             <RightBar/>
         </main>
 
@@ -23,7 +35,6 @@
 
 .timeline {
     height: 100%;
-    padding: var(--ratio-1);
 }
 
 .timeline__main {
@@ -35,21 +46,29 @@
 }
 
 .timeline__main__posts {
-    padding: var(--ratio-1);
+    width: calc(100vw - 605px);
+    padding: var(--ratio-2);
 }
 
-.timeline__main__search-container {
+.timeline__main__posts__controller {
+    max-height: 100px;
+    width: 50px;
     position: sticky;
-    top: -1px;
-    background: white;
-    padding: var(--ratio-1) 0;
+    top: var(--ratio-2);
 }
 
-.timeline__main__search {
-    border-radius: var(--rounded-2);
-    padding: var(--ratio-1) var(--ratio-2);
+.timeline__main__posts__create {
     background-color: white;
-    border: 2px solid var(--color-grey-1);
+    border: 2px solid var(--color-main-1);
+    border-radius: var(--rounded-total);
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    transition: background-color 0.05s, color 0.05s;
+}
+
+.timeline__main__posts__create:hover {
+    background-color: var(--color-main-1);
 }
 
 </style>
@@ -58,10 +77,11 @@
 import Post from "@/components/Post";
 import LeftBar from "@/layout/LeftBar.vue";
 import RightBar from "@/layout/RightBar.vue";
+import Popup from "@/components/Popup.vue";
 
 export default {
     name: "Timeline",
-    components: {RightBar, LeftBar, Post},
+    components: {Popup, RightBar, LeftBar, Post},
     data() {
         return {
             name: "Gabriel"

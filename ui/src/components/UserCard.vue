@@ -37,7 +37,7 @@
 }
 
 .user-card__photo {
-    height: 50px;
+    height: v-bind(ratio);
     aspect-ratio: 1/1;
     border-radius: var(--rounded-total);
     background: url("@/assets/img/joao.jpg") center no-repeat;
@@ -51,7 +51,11 @@ export default {
     name: "UserCard",
     props: {
         name: String,
-        nickname: String
+        nickname: String,
+        ratio: {
+            default: "40px",
+            type: String
+        }
     }
 }
 </script>

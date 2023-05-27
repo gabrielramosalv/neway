@@ -1,8 +1,6 @@
 <template>
     <nav class="left-bar flex column gap-1">
-        <h2 class="left-bar__logo">
-            Neway
-        </h2>
+        <h2 class="left-bar__logo">Neway</h2>
         <div class="flex column">
             <button class="left-bar__button flex  align-i-center gap-1 width-full">
                 <span class="left-bar__button__image"></span>
@@ -14,11 +12,7 @@
             </button>
             <button class="left-bar__button flex  align-i-center gap-1 width-full">
                 <span class="left-bar__button__image"></span>
-                <span>Configurações</span>
-            </button>
-            <button class="left-bar__button flex  align-i-center gap-1 width-full">
-                <span class="left-bar__button__image"></span>
-                <span>Criar</span>
+                <span>Notificações</span>
             </button>
         </div>
         <span class="left-bar__copyright">Copyright Neway @2023</span>
@@ -26,6 +20,15 @@
 </template>
 
 <style scoped>
+
+.left-bar {
+    left: 0;
+    position: fixed;
+    height: 100vh;
+    width: 300px;
+    padding: var(--ratio-1);
+    border-right: 2px solid var(--color-grey-1);
+}
 
 .left-bar__copyright {
     color: var(--color-text-aside-1);
@@ -37,13 +40,6 @@
     color: var(--color-main-1);
     padding: var(--ratio-1);
     user-select: none;
-}
-
-.left-bar {
-    left: var(--ratio-1);
-    position: fixed;
-    height: calc(100vh - calc(2 * var(--ratio-1)));
-    width: 250px;
 }
 
 .left-bar__button {
@@ -60,10 +56,11 @@
 }
 
 .left-bar__button__image {
+    background: url("@/assets/img/Vector.svg") center no-repeat;
+    background-size: 100%;
     height: 25px;
     aspect-ratio: 1/1;
-    border-radius: var(--rounded-2);
-    border: 2px solid var(--color-main-1);
+    //border: 2px solid var(--color-main-1);
 }
 
 </style>

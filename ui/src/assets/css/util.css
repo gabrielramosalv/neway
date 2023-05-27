@@ -14,12 +14,20 @@
     justify-content: center;
 }
 
+.justify-c-end {
+    justify-content: flex-end;
+}
+
 .align-i-center {
     align-items: center;
 }
 
 .align-i-start {
     align-items: flex-start;
+}
+
+.gap-0_1 {
+    gap: calc(var(--ratio-1) / 2);
 }
 
 .gap-1 {
@@ -36,4 +44,17 @@
 
 .width-full {
     width: 100%;
+}
+
+.inset-screen {
+    width: 100vw;
+    height: 100vh;
+}
+
+.user-select-none {
+    user-select: none;
+}
+
+.bold {
+    font-weight: 700;
 }

@@ -1,5 +1,7 @@
 :root {
     --color-main-1: #36147A;
+    --color-main-2: #451e93;
+    --color-grey-0_5: rgb(248, 248, 248);
     --color-grey-1: rgb(241, 241, 241);
     --color-grey-2: rgb(225, 225, 225);
 
@@ -9,7 +11,13 @@
     --ratio-1: 15px;
     --ratio-2: 30px;
 
-    --rounded-1: 4px;
+    /** Filhos de Container. */
+    --rounded-1: 6px;
+    /** Container. */
     --rounded-2: 8px;
+
     --rounded-total: 999px;
+
+    --action-height: 45px;
+    --action-side: var(--ratio-1);
 }

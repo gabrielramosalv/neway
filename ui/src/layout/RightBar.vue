@@ -1,16 +1,14 @@
 <template>
     <nav class="right-bar flex column align-i-start gap-1">
-        <UserCard name="João Gomes" nickname="@mengudoprasempre"/>
+        <UserCard name="João Gomes" nickname="@mengudoprasempre" ratio="50px" border-color="var(--color-main-1)"/>
         <section class="flex column gap-1 width-full">
-            <h3 class="right-bar__friends-title">Amigos</h3>
+            <input type="search" class="right-bar__search" placeholder="Procure pessoas no Neway"/>
             <div class="right-bar__friends-list flex column">
-
                 <UserCard v-for="(user, index) in users"
                           v-bind:nickname="user.nickname"
                           v-bind:name="user.name"
                           v-bind:key="index"
                 />
-
                 <div class="right-bar__friends-list__fade"></div>
             </div>
         </section>
@@ -19,10 +17,20 @@
 
 <style scoped>
 .right-bar {
-    right: var(--ratio-1);
+    right: 0;
     position: fixed;
     height: calc(100vh - calc(2 * var(--ratio-1)));
     width: 300px;
+    padding: var(--ratio-1);
+    border-left: 2px solid var(--color-grey-1);
+}
+
+.right-bar__search {
+    border-radius: var(--rounded-2);
+    font-weight: 700;
+    background-color: transparent;
+    border: 2px solid var(--color-grey-1);
+    padding: var(--ratio-1);
 }
 
 .right-bar__friends-title {
