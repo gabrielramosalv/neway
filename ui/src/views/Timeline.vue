@@ -13,16 +13,9 @@
                     <Post/>
                 </div>
                 <div class="timeline__main__posts__controller">
-                    <div class="flex column align-i-center gap-0_1">
-                        <button class="timeline__main__posts__create">
-                            <Popup title="Criar publicação">
-                                <template v-slot:content>
-                                    
-                                </template>
-                            </Popup>
-                        </button>
-                        <span class="user-select-none bold">Criar</span>
-                    </div>
+                    <button class="timeline__main__posts__create">
+                        <CreatingPostPopup/>
+                    </button>
                 </div>
             </section>
             <RightBar/>
@@ -58,17 +51,18 @@
 }
 
 .timeline__main__posts__create {
-    background-color: white;
     border: 2px solid var(--color-main-1);
     border-radius: var(--rounded-total);
     width: 50px;
     height: 50px;
     cursor: pointer;
     transition: background-color 0.05s, color 0.05s;
+    background-color: var(--color-main-1);
+    flex-shrink: 0;
 }
 
 .timeline__main__posts__create:hover {
-    background-color: var(--color-main-1);
+    background-color: var(--color-main-2);
 }
 
 </style>
@@ -77,11 +71,11 @@
 import Post from "@/components/Post";
 import LeftBar from "@/layout/LeftBar.vue";
 import RightBar from "@/layout/RightBar.vue";
-import Popup from "@/components/Popup.vue";
+import CreatingPostPopup from "@/components/CreatingPostPopup.vue";
 
 export default {
     name: "Timeline",
-    components: {Popup, RightBar, LeftBar, Post},
+    components: {CreatingPostPopup, RightBar, LeftBar, Post},
     data() {
         return {
             name: "Gabriel"

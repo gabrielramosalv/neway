@@ -16,6 +16,7 @@
     cursor: pointer;
     text-align: center;
     text-decoration: none;
+    width: fit-content;
 }
 
 .button:hover {

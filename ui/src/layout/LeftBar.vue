@@ -27,7 +27,7 @@
     height: 100vh;
     width: 300px;
     padding: var(--ratio-1);
-    border-right: 2px solid var(--color-grey-1);
+    border-right: 2px solid var(--color-grey-2);
 }
 
 .left-bar__copyright {

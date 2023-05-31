@@ -26,6 +26,10 @@
     align-items: flex-start;
 }
 
+.align-i-end {
+    align-items: flex-end;
+}
+
 .gap-0_1 {
     gap: calc(var(--ratio-1) / 2);
 }
@@ -46,6 +50,14 @@
     width: 100%;
 }
 
+.height-full{
+    height: 100%;
+}
+
+.grow {
+    flex-grow: 1;
+}
+
 .inset-screen {
     width: 100vw;
     height: 100vh;
@@ -57,4 +69,12 @@
 
 .bold {
     font-weight: 700;
+}
+
+.minor {
+    font-size: 0.9em;
+}
+
+.aside {
+    color: var(--color-text-aside-1);
 }

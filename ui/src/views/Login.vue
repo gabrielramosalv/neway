@@ -2,8 +2,8 @@
     <div class="login inset-screen flex justify-c-center align-i-center">
         <div class="login-container flex column gap-1">
             <h1 class="login-container__title">Neway</h1>
-            <Input type="text" placeholder="Apelido"/>
-            <Input type="password" placeholder="Senha"/>
+            <TextField type="text" placeholder="Apelido"/>
+            <TextField type="password" placeholder="Senha"/>
 
             <a href="" class="login-container__forget">Esqueceu a senha?</a>
 
@@ -56,10 +56,10 @@
 
 <script>
 import Button from "@/components/Button.vue";
-import Input from "@/components/Input.vue";
+import TextField from "@/components/TextField.vue";
 
 export default {
     name: "Login",
-    components: {Button, Input}
+    components: {Button, TextField}
 }
 </script>

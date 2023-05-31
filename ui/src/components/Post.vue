@@ -1,30 +1,24 @@
 <template>
     <article class="post flex column gap-1">
 
-        <header class="width-full">
+        <header class="flex justify-c-between align-i-center width-full">
             <div class="flex align-i-center gap-1">
                 <div class="post__header__user__photo"></div>
                 <span class="post__header__user__name">roberto</span>
             </div>
+            <span class="minor aside">às 14:00 em 25/05/2023</span>
         </header>
 
-        <div class="post__content flex column align-i-start justify-c-center">
-
-        </div>
+        <div class="post__content flex column align-i-start justify-c-center"></div>
 
         <footer class="flex row align-i-center justify-c-between width-full">
+            <p class="post__caption__content">Legenda</p>
             <div class="flex gap-1">
                 <div class="post__interaction"></div>
                 <div class="post__interaction"></div>
-                <div class="post__interaction"></div>
             </div>
-            <span class="post__date bold">25/05/2023 14:00</span>
         </footer>
 
-        <div class="post__caption flex">
-            <span class="post__caption__username">roberto</span>
-            <span class="post__caption__content">Legenda</span>
-        </div>
 
     </article>
 </template>
@@ -67,24 +61,11 @@
     width: 160px;
 }
 
-.post__caption {
-    gap: calc(var(--ratio-1) * 0.7);
-}
-
-.post__caption__username {
-    font-weight: 600;
-}
-
 .post__interaction {
     height: 35px;
     width: 35px;
     background-color: var(--color-grey-1);
     border-radius: 100%;
-}
-
-.post__date {
-    color: var(--color-text-aside-1);
-    font-size: 0.9em;
 }
 
 </style>

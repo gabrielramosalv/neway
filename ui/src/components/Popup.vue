@@ -12,14 +12,14 @@
 
 .popup {
     display: none;
-    width: 550px;
+    min-width: v-bind(width);
     height: fit-content;
     border-radius: var(--rounded-2);
     background-color: white;
     border: none;
     position: absolute;
     margin: auto;
-    padding: var(--ratio-2);
+    padding: var(--ratio-1);
     cursor: default;
 }
 
@@ -32,7 +32,7 @@
 }
 
 .popup__close {
-    height: 40px;
+    height: 35px;
     aspect-ratio: 1/1;
     border-radius: var(--rounded-total);
     border: none;
@@ -57,6 +57,10 @@ export default {
         title: {
             type: String,
             default: ""
+        },
+        width: {
+            type: String,
+            default: "fit-content"
         }
     },
     mounted() {
