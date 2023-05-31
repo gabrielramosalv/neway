@@ -1,6 +1,6 @@
 <template>
-    <input v-bind:type="type" class="text-field input bold" v-bind:placeholder="placeholder" v-if="type !== 'textarea'">
-    <textarea class="text-field textarea bold" v-bind:placeholder="placeholder" v-else rows="3"></textarea>
+    <input v-bind:type="type" class="text-field input bold" v-bind:placeholder="placeholder" v-if="type !== 'textarea'" v-bind:maxlength="maxlength">
+    <textarea class="text-field textarea bold" v-bind:placeholder="placeholder" v-else rows="3" v-bind:maxlength="maxlength"></textarea>
 </template>
 
 <style scoped>
@@ -33,6 +33,10 @@ export default {
     name: "TextField",
     props: {
         placeholder: {
+            default: "",
+            type: String
+        },
+        maxlength: {
             default: "",
             type: String
         },
