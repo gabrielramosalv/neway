@@ -19,7 +19,12 @@
     background-size: cover;
     border-radius: var(--rounded-2);
     height: 300px;
-    background-color: var(--color-grey-1);
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+.interactionsPost__content:hover {
+    transform: scale(1.05);
 }
 
 </style>
