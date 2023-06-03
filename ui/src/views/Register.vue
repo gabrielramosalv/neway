@@ -50,8 +50,8 @@
 </style>
 
 <script>
-import Button from "@/components/Button.vue";
-import TextField from "@/components/TextField.vue";
+import Button from "@/components/base/Button.vue";
+import TextField from "@/components/base/TextField.vue";
 
 export default {
     name: "Register",

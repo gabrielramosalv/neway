@@ -42,8 +42,8 @@
 
 <script>
 
-import UserCard from "@/components/UserCard.vue";
-import TextField from "@/components/TextField.vue";
+import UserCard from "@/views/Timeline/UserCard.vue";
+import TextField from "@/components/base/TextField.vue";
 
 export default {
     name: "RightBar",

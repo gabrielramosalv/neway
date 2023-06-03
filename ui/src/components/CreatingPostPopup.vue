@@ -63,10 +63,10 @@
 </style>
 
 <script>
-import Popup from "@/components/Popup.vue";
-import Button from "@/components/Button.vue";
-import Checkbox from "@/components/Checkbox.vue";
-import TextField from "@/components/TextField.vue";
+import Popup from "@/components/base/Popup.vue";
+import Button from "@/components/base/Button.vue";
+import Checkbox from "@/components/base/Checkbox.vue";
+import TextField from "@/components/base/TextField.vue";
 
 export default {
     name: "CreatingPostPopup",

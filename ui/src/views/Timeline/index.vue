@@ -39,9 +39,9 @@
 </style>
 
 <script>
-import Post from "@/components/Post";
-import LeftBar from "@/layout/LeftBar.vue";
-import RightBar from "@/layout/RightBar.vue";
+import Post from "@/views/Timeline/TimelinePost.vue";
+import LeftBar from "@/components/layout/LeftBar.vue";
+import RightBar from "@/components/layout/RightBar.vue";
 
 export default {
     name: "Timeline",

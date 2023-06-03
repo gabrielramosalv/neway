@@ -92,9 +92,9 @@
 </style>
 import LeftBar from "@/layout/LeftBar.vue";
 <script>
-import LeftBar from "@/layout/LeftBar.vue";
-import profilePost from "@/components/ProfilePost.vue";
-import textField from "@/components/TextField.vue";
+import LeftBar from "@/components/layout/LeftBar.vue";
+import profilePost from "@/views/Profile/ProfilePost.vue";
+import textField from "@/components/base/TextField.vue";
 
 export default {
     name: "Profile",

@@ -67,8 +67,8 @@
 </style>
 
 <script>
-    import LeftBar from "@/layout/LeftBar.vue";
-    import InteractionsPost from "@/components/InteractionsPost.vue";
+    import LeftBar from "@/components/layout/LeftBar.vue";
+    import InteractionsPost from "@/views/Interactions/InteractionsPost.vue";
 
     export default {
         name:"Interactions",
