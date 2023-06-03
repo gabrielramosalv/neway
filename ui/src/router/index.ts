@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Timeline from '../views/Timeline.vue'
 import Login from "../views/Login.vue"
-import Profile from "../views/Profile.vue";
+import Profile from "../views/Profile.vue"
+import Interactions from "../views/Interactions.vue"
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -18,6 +19,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/@:username',
     name: 'Profile',
     component: Profile
+  },
+  {
+    path: '/interactions',
+    name: 'Login',
+    component: Interactions
   }
 ]
 
