@@ -4,17 +4,18 @@
             <div class="flex column gap-1 align-i-end">
                 <div class="flex column align-i-center gap-1 width-full">
                     <label class="create-post__input-image flex align-i-center justify-c-center"
-                           for="post-image"
-                           v-show="image">
+                           for="post-image" v-show="image">
                         <img ref="image" class="create-post__image"/>
-                        <input type="file" accept="image/*" id="post-image" @change="loadImage"/>
+                        <span ref="imageMessage" class="bold aside">Carregue uma foto</span>
+                        <input type="file" accept="image/*" id="post-image" @input="loadImage"
+                               @cancel="$event.preventDefault()"/>
                     </label>
                     <TextField type="textarea" class="create-post__text" placeholder="Escreva sua legenda aqui..."/>
                 </div>
                 <div class="flex justify-c-between align-i-center width-full">
                     <div class="flex gap-1 align-i-center">
                         <Checkbox v-model="image"/>
-                        <span>Foto</span>
+                        <span>Anexar foto</span>
                     </div>
                     <Button content="Postar"/>
                 </div>
@@ -36,11 +37,23 @@
     border-radius: var(--rounded-2);
     cursor: pointer;
     overflow: hidden;
+    position: relative;
 }
 
 .create-post__image {
     height: 100%;
     object-fit: contain;
+    position: relative;
+}
+
+.create-post__remove-image {
+    width: 30px;
+    aspect-ratio: 1/1;
+    background-color: var(--color-red-1);
+    border-radius: var(--rounded-total);
+    position: absolute;
+    right: var(--ratio-1);
+    bottom: var(--ratio-1);
 }
 
 .create-post__text {
@@ -63,21 +76,30 @@ export default {
             image: true
         }
     },
+    watch: {
+        image(newValue) {
+            if (!newValue) {
+                this.$refs.imageMessage.removeAttribute("style");
+                this.$refs.image.style.display = "none";
+                this.$refs.image.src = "";
+            }
+        }
+    },
     methods: {
         loadImage(event) {
             let files = event.srcElement.files;
-            let fr = new FileReader();
-            fr.onload = () => {
-                if (files.length > 0) {
+            if (files.length > 0) {
+                this.$refs.imageMessage.style.display = "none";
+                let fr = new FileReader();
+                fr.onload = () => {
                     this.$refs.image.style.removeProperty("display");
                     this.$refs.image.src = fr.result;
-                } else {
-                    this.$refs.image.src = "";
-                    this.$refs.image.style.display = "none";
                 }
-            }
-            if (files.length > 0) {
                 fr.readAsDataURL(files[0]);
+            } else {
+                this.$refs.imageMessage.removeAttribute("style");
+                this.$refs.image.style.display = "none";
+                this.$refs.image.src = "";
             }
         }
     }

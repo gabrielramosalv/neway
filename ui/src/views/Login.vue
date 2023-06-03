@@ -7,11 +7,11 @@
 
             <a href="" class="login-container__forget">Esqueceu a senha?</a>
 
-            <Button content="Entrar"/>
+            <Button content="Entrar" class="width-full"/>
 
             <hr class="linha-divisoria">
 
-            <Button content="Nova conta"/>
+            <Button content="Nova conta" class="width-full"/>
         </div>
     </div>
 </template>

@@ -19,7 +19,7 @@
 .right-bar {
     right: 0;
     position: fixed;
-    height: calc(100vh - calc(2 * var(--ratio-1)));
+    height: 100vh;
     width: 300px;
     padding: var(--ratio-1);
     border-left: 2px solid var(--color-grey-2);

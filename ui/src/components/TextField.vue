@@ -1,12 +1,15 @@
 <template>
-    <input v-bind:type="type" class="text-field input bold" v-bind:placeholder="placeholder" v-if="type !== 'textarea'" v-bind:maxlength="maxlength">
-    <textarea class="text-field textarea bold" v-bind:placeholder="placeholder" v-else rows="3" v-bind:maxlength="maxlength"></textarea>
+    <input v-bind:type="type" class="text-field input bold" v-bind:placeholder="placeholder" v-if="type !==
+    'textarea'" v-bind:maxlength="maxlength" spellcheck="false"
+           @input="$emit('update:modelValue', $event.target.value)" v-bind:value="modelValue">
+    <textarea class="text-field textarea bold" v-bind:placeholder="placeholder" v-else :rows="rows"
+              v-bind:maxlength="maxlength" spellcheck="false"></textarea>
 </template>
 
 <style scoped>
 
 .text-field {
-    border: 2px solid var(--color-grey-2);
+    border: v-bind(border);
     border-radius: var(--rounded-1);
     background-color: transparent;
     outline: none;
@@ -32,6 +35,7 @@
 export default {
     name: "TextField",
     props: {
+        modelValue: String,
         placeholder: {
             default: "",
             type: String
@@ -42,6 +46,14 @@ export default {
         },
         type: {
             default: "text",
+            type: String
+        },
+        rows: {
+            default: "2",
+            type: String
+        },
+        border: {
+            default: "2px solid var(--color-grey-2)",
             type: String
         }
     }

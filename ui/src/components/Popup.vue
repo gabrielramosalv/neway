@@ -1,17 +1,34 @@
 <template>
-    <dialog class="popup flex column gap-1">
-        <header class="popup__header flex align-i-center justify-c-between">
-            <span class="popup__title bold">{{ title }}</span>
-            <button @click="close" ref="closeButton" class="popup__close"></button>
-        </header>
-        <slot name="content"></slot>
-    </dialog>
+    <div class="popup-container flex align-i-center justify-c-center">
+        <div class="popup flex column gap-1">
+            <header class="popup__header flex align-i-center justify-c-between">
+                <span class="headline bold">{{ title }}</span>
+                <button @click="close" ref="closeButton" class="popup__close"></button>
+            </header>
+            <slot name="content"></slot>
+        </div>
+    </div>
 </template>
 
 <style scoped>
 
-.popup {
+.popup-container[open] {
+    display: flex;
+}
+
+.popup-container {
     display: none;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.5);
+    cursor: default;
+}
+
+.popup {
     min-width: v-bind(width);
     height: fit-content;
     border-radius: var(--rounded-2);
@@ -21,14 +38,6 @@
     margin: auto;
     padding: var(--ratio-1);
     cursor: default;
-}
-
-.popup[open]{
-    display: flex;
-}
-
-.popup::backdrop {
-    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .popup__close {
@@ -42,10 +51,6 @@
 
 .popup__close:hover {
     background-color: var(--color-grey-1);
-}
-
-.popup__title {
-    font-size: 1.5em;
 }
 
 </style>
@@ -63,20 +68,28 @@ export default {
             default: "fit-content"
         }
     },
+    data() {
+        return {
+            parentElement: null
+        }
+    },
     mounted() {
-        this.$el.parentElement.addEventListener("click", (ev) => {
+        this.parentElement = this.$el.parentElement;
+        this.parentElement.addEventListener("click", (ev) => {
             if (this.$el.getAttribute("open") == null &&
                 (ev.target !== this.$refs.closeButton ||
                     !this.$refs.closeButton.contains(ev.target))) {
-                this.$el.showModal();
+                this.$el.setAttribute("open", "");
                 document.body.style.overflow = "hidden";
+                document.body.appendChild(this.$el);
             }
         });
     },
     methods: {
         close() {
             document.body.style.removeProperty("overflow");
-            this.$el.close();
+            this.$el.removeAttribute("open");
+            this.parentElement.appendChild(this.$el);
         }
     }
 }

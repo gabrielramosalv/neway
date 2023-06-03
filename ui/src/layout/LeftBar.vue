@@ -8,11 +8,12 @@
             </button>
             <button class="left-bar__button flex  align-i-center gap-1 width-full">
                 <span class="left-bar__button__image"></span>
-                <span>Comunidade</span>
+                <span>Interações</span>
             </button>
             <button class="left-bar__button flex  align-i-center gap-1 width-full">
                 <span class="left-bar__button__image"></span>
-                <span>Notificações</span>
+                <span>Publicar</span>
+                <CreatingPostPopup/>
             </button>
         </div>
         <span class="left-bar__copyright">Copyright Neway @2023</span>
@@ -67,7 +68,10 @@
 
 <script>
 
+import CreatingPostPopup from "@/components/CreatingPostPopup.vue";
+
 export default {
-    name: "LeftBar"
+    name: "LeftBar",
+    components: {CreatingPostPopup}
 }
 </script>
