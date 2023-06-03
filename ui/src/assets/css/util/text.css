@@ -1,0 +1,29 @@
+/** Largura do texto (text-width-{x}). */
+
+.t-w-bold {
+    font-weight: 700;
+}
+
+.t-w-normal {
+    font-weight: 500;
+}
+
+.t-w-minor {
+    font-size: 0.9em;
+}
+
+/** Tamanho do texto (text-size-{x}). */
+
+.t-s-headline {
+    font-size: 1.5em;
+}
+
+.t-s-title {
+    font-size: 2em;
+}
+
+/** Cor do texto (text-size-{x}). */
+
+.t-c-aside {
+    color: var(--color-text-aside-1);
+}

@@ -1,8 +1,8 @@
 <template>
-    <input v-bind:type="type" class="text-field input bold" v-bind:placeholder="placeholder" v-if="type !==
+    <input v-bind:type="type" class="text-field input t-w-bold" v-bind:placeholder="placeholder" v-if="type !==
     'textarea'" v-bind:maxlength="maxlength" spellcheck="false"
            @input="$emit('update:modelValue', $event.target.value)" v-bind:value="modelValue">
-    <textarea class="text-field textarea bold" v-bind:placeholder="placeholder" v-else :rows="rows"
+    <textarea class="text-field textarea t-w-bold" v-bind:placeholder="placeholder" v-else :rows="rows"
               v-bind:maxlength="maxlength" spellcheck="false"></textarea>
 </template>
 

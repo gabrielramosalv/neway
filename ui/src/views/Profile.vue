@@ -7,9 +7,9 @@
         <div class="profile__header flex align-i-center ">
             <article class="profile__user-card flex align-i-center gap-2">
                 <div class="profile__user-card__photo"></div>
-                <div class="flex column align-i-start gap-0_1">
-                    <text-field class="title" placeholder="Nome" maxlength="150" model-value="oi" border="none"/>
-                    <text-field class="aside" placeholder="Apelido" maxlength="50" border="none"/>
+                <div class="flex column align-i-start gap-1_2">
+                    <text-field class="t-s-title" placeholder="Nome" maxlength="150" model-value="oi" border="none"/>
+                    <text-field class="t-c-aside" placeholder="Apelido" maxlength="50" border="none"/>
                     <text-field class="profile__header__biografy" placeholder="Escreva sobre você..."
                                 type="textarea" maxlength="150" rows="5" border="none"/>
                 </div>
@@ -19,7 +19,7 @@
                 <span class="profile__header__quatity__post">Publicações: {{ 0 }}</span>
             </div>
         </div>
-        <div class="profile__posts flex justify-c-center gap-0_1">
+        <div class="profile__posts flex justify-c-center gap-1_2">
             <profile-post/>
             <profile-post/>
             <profile-post/>

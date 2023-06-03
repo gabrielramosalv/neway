@@ -2,7 +2,7 @@
     <div class="popup-container flex align-i-center justify-c-center">
         <div class="popup flex column gap-1">
             <header class="popup__header flex align-i-center justify-c-between">
-                <span class="headline bold">{{ title }}</span>
+                <span class="t-s-headline t-w-bold">{{ title }}</span>
                 <button @click="close" ref="closeButton" class="popup__close"></button>
             </header>
             <slot name="content"></slot>

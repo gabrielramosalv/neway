@@ -6,7 +6,7 @@
                     <label class="create-post__input-image flex align-i-center justify-c-center"
                            for="post-image" v-show="image">
                         <img ref="image" class="create-post__image"/>
-                        <span ref="imageMessage" class="bold aside">Carregue uma foto</span>
+                        <span ref="imageMessage" class="t-w-bold t-c-aside">Carregue uma foto</span>
                         <input type="file" accept="image/*" id="post-image" @input="loadImage"
                                @cancel="$event.preventDefault()"/>
                     </label>

@@ -8,8 +8,8 @@
         <h1 class="interactions__title">Suas interações</h1>
         
         <div class="interactions__button flex justify-c-center">
-            <button class="interactions__button__like bold aside">Curtidas</button>
-            <button class="interactions__button__save bold aside">Salvos</button>
+            <button class="interactions__button__like t-w-bold t-c-aside">Curtidas</button>
+            <button class="interactions__button__save t-w-bold t-c-aside">Salvos</button>
         </div>
 
         <div class="interactions__posts flex justify-c-center gap-1">
