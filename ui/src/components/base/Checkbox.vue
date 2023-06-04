@@ -14,14 +14,14 @@
     height: 20px;
     aspect-ratio: 1/1;
     border-radius: var(--rounded-total);
-    background-color: var(--color-grey-1);
+    background-color: transparent;
     border: 2px solid var(--color-grey-2);
     cursor: pointer;
 }
 
 .checkbox::after {
     content: "";
-    background-color: var(--color-grey-1);
+    background-color: transparent;
     height: 12px;
     aspect-ratio: 1/1;
     border-radius: var(--rounded-total);

@@ -8,11 +8,11 @@
     font-weight: 500;
 }
 
-.t-w-minor {
+/** Tamanho do texto (text-size-{x}). */
+
+.t-s-minor {
     font-size: 0.9em;
 }
-
-/** Tamanho do texto (text-size-{x}). */
 
 .t-s-headline {
     font-size: 1.5em;

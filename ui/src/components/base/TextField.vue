@@ -1,7 +1,6 @@
 <template>
     <input v-bind:type="type" class="text-field input t-w-bold" v-bind:placeholder="placeholder" v-if="type !==
-    'textarea'" v-bind:maxlength="maxlength" spellcheck="false"
-           @input="$emit('update:modelValue', $event.target.value)" v-bind:value="modelValue">
+    'textarea'" v-bind:maxlength="maxlength" spellcheck="false" @input="change" v-bind:value="modelValue">
     <textarea class="text-field textarea t-w-bold" v-bind:placeholder="placeholder" v-else :rows="rows"
               v-bind:maxlength="maxlength" spellcheck="false"></textarea>
 </template>
@@ -55,6 +54,18 @@ export default {
         border: {
             default: "2px solid var(--color-grey-2)",
             type: String
+        },
+        formatter: {
+            default: (text) => {
+                return text;
+            },
+            type: Function
+        }
+    },
+    methods: {
+        change(event) {
+            event.target.value = this.formatter(event.target.value);
+            this.$emit('update:modelValue', event.target.value);
         }
     }
 }

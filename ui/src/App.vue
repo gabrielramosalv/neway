@@ -1,13 +1,28 @@
 <template>
-    <router-view/>
+    <div>
+        <ResponseMessageBox ref="messageBox"/>
+        <router-view @message="(message) => $refs.messageBox.addMessage(message)"/>
+    </div>
 </template>
 
+<script>
+
+import ServiceException from "@/services/ServiceException";
+import {Message, MessageType} from "@/Message";
+import ResponseMessageBox from "@/components/ResponseMessageBox.vue";
+
+export default {
+    name: "App",
+    components: {ResponseMessageBox},
+    errorCaptured(err, vm, info) {
+        if (err instanceof ServiceException) {
+            this.$refs.messageBox.addMessage(new Message(err.message, MessageType.ERROR));
+            return false;
+        }
+    }
+}
+</script>
+
 <style>
-@import "@/assets/css/normalize.css";
-@import "@/assets/css/variables.css";
-@import "@/assets/css/font.css";
-@import "@/assets/css/util/position.css";
-@import "@/assets/css/util/text.css";
-@import "@/assets/css/base.css";
-@import "@/assets/css/util/interaction.css";
+@import "@/assets/css/import.css";
 </style>

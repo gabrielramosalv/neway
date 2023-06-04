@@ -5,29 +5,41 @@ import Register from "@/views/Register.vue";
 import Profile from "@/views/Profile/index.vue";
 import Interactions from "@/views/Interactions/index.vue";
 
+export enum Paths {
+    TIMELINE = "/timeline",
+    LOGIN = "/login",
+    REGISTER = "/register",
+    PROFILE = "/@:username",
+    INTERACTIONS = "/interactions"
+}
+
+export const getProfileByNickname = (nickname: string) => {
+    return Paths.PROFILE.replace(":username", nickname);
+}
+
 const routes: Array<RouteRecordRaw> = [
     {
-        path: '/',
+        path: Paths.TIMELINE,
         name: 'Timeline',
         component: Timeline
     },
     {
-        path: '/login',
+        path: Paths.LOGIN,
         name: 'Login',
         component: Login
     },
     {
-        path: "/register",
+        path: Paths.REGISTER,
         name: "Register",
         component: Register
     },
     {
-        path: '/@:username',
+        path: Paths.PROFILE,
         name: 'Profile',
         component: Profile
     },
     {
-        path: '/interactions',
+        path: Paths.INTERACTIONS,
         name: 'Interactions',
         component: Interactions
     }

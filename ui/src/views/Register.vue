@@ -3,14 +3,17 @@
         <div class="register-container flex column gap-2">
             <h1 class="register-container__title">Neway</h1>
             <div class="flex column gap-1">
-                <TextField type="text" placeholder="Primeiro nome"/>
-                <TextField type="text" placeholder="Último nome"/>
-                <TextField type="text" placeholder="Apelido"/>
-                <TextField type="password" placeholder="Senha"/>
-                <TextField type="password" placeholder="Repetir senha"/>
+                <TextField type="text" placeholder="Primeiro nome" v-model="firstName"
+                           v-bind:formatter="User.nameFormatter"/>
+                <TextField type="text" placeholder="Último nome" v-model="lastName"
+                           v-bind:formatter="User.nameFormatter"/>
+                <TextField type="text" placeholder="Apelido" v-model="nickname"
+                           v-bind:formatter="User.nicknameFormatter"/>
+                <TextField type="password" placeholder="Senha" v-model="password"/>
+                <TextField type="password" placeholder="Repetir senha" v-model="repeatPassword"/>
             </div>
             <div class="flex column gap-1">
-                <Button content="Cadastrar" class="width-full"/>
+                <Button content="Cadastrar" class="width-full" @click="register"/>
                 <hr class="line">
                 <Button content="Voltar" class="width-full" border="2px solid var(--color-main-1)"
                         bg-color="transparent" text-color="var(--color-main-1)" to="/login"/>
@@ -52,9 +55,45 @@
 <script>
 import Button from "@/components/base/Button.vue";
 import TextField from "@/components/base/TextField.vue";
+import {ServiceManager} from "@/services/ServiceManager";
+import {Message, MessageType} from "@/Message";
+import router from "@/router";
+import {Paths} from "@/router/routes";
+import {User} from "@/services/user/User";
 
 export default {
     name: "Register",
-    components: {TextField, Button}
+    computed: {
+        User() {
+            return User
+        }
+    },
+    components: {TextField, Button},
+    data() {
+        return {
+            firstName: "",
+            lastName: "",
+            nickname: "",
+            password: "",
+            repeatPassword: ""
+        }
+    },
+    methods: {
+        register() {
+            if (this.password !== this.repeatPassword) {
+                this.$emit("message", new Message("As senhas não coincidem", MessageType.ERROR));
+                return;
+            }
+            let user = new User(this.nickname, this.firstName, this.lastName, this.password);
+            user.validate();
+            if (ServiceManager.getInstance().user.getByNickname(user.nickname) != null) {
+                this.$emit("message", new Message("Apelido já cadastrado", MessageType.ERROR));
+                return;
+            }
+            ServiceManager.getInstance().user.save(user);
+            this.$emit("message", new Message("Usuário registrado com sucesso", MessageType.SUCCESS));
+            router.push(Paths.LOGIN);
+        }
+    }
 }
 </script>

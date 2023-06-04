@@ -6,7 +6,7 @@
                 <div class="post__header__user__photo"></div>
                 <span class="post__header__user__name">roberto</span>
             </div>
-            <span class="t-w-minor t-c-aside">às 14:00 em 25/05/2023</span>
+            <span class="t-s-minor t-c-aside">às 14:00 em 25/05/2023</span>
         </header>
 
         <div class="post__content flex column align-i-start justify-c-center"></div>
