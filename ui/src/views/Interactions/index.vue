@@ -8,13 +8,21 @@
         <h1 class="interactions__title">Suas interações</h1>
         
         <div class="interactions__button flex justify-c-center">
-            <button class="interactions__button__like t-w-bold t-c-aside">Curtidas</button>
-            <button class="interactions__button__save t-w-bold t-c-aside">Salvos</button>
+            <button @click="interactionsTab($event, 'posts__liked')"
+            class="interactions__button__like t-w-bold t-c-aside active">Curtidas</button>
+            <button @click="interactionsTab($event, 'posts__saved')" 
+            class="interactions__button__save t-w-bold t-c-aside" >Salvos</button>
         </div>
 
-        <div class="interactions__posts flex justify-c-center gap-1">
+        <div id="posts__liked" class="interactions__posts flex justify-c-center gap-1">
             <interactions-post/>
             <interactions-post/>
+            <interactions-post/>
+            <interactions-post/>
+            <interactions-post/>
+        </div>
+
+        <div id="posts__saved" class="interactions__posts flex justify-c-center gap-1">
             <interactions-post/>
             <interactions-post/>
             <interactions-post/>
@@ -33,7 +41,6 @@
 
 .interactions__title {
     font-size: 2.5em;
-    text-align: center;
     margin-top: var(--ratio-2);
     color: var(--color-main-1);
     user-select: none;
@@ -52,8 +59,8 @@
     transition: color 0.2s;
 }
 
-.interactions__button__like:active,
-.interactions__button__save:active {
+.interactions__button__like.active,
+.interactions__button__save.active {
     color: var(--color-main-1);
     border-bottom: 2px solid var(--color-main-1);
 }
@@ -61,7 +68,8 @@
 .interactions__posts{
     flex-wrap: wrap;
     justify-content: left;
-    width: 1095px;
+    padding: 0 0 var(--ratio-2) 0;
+    width: calc(1030px + var(--ratio-1));
 }
 
 </style>
@@ -73,5 +81,20 @@
     export default {
         name:"Interactions",
         components: {LeftBar, InteractionsPost},
+        methods: {
+            interactionsTab(evt, tabName) {
+                var i, tabContent, tabLinks;
+                tabContent = document.getElementsByClassName("interactions__posts");
+                for (i = 0; i < tabContent.length; i++) {
+                    tabContent[i].style.display = "none";
+                }
+                tabLinks = document.getElementsByTagName("button");
+                for (i = 0; i < tabLinks.length; i++) {
+                    tabLinks[i].className = tabLinks[i].className.replace(" active", "");
+                }
+                document.getElementById(tabName).style.display = "flex";
+                evt.currentTarget.className += " active";
+            }
+        }
     }
 </script>
