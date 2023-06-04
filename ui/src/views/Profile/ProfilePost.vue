@@ -1,5 +1,9 @@
 <template>
-    <article class="profilePost"></article>
+    <article class="profilePost">
+        <ProfilePopup>
+
+        </ProfilePopup>
+    </article>
 </template>
 
 <style scoped>
@@ -13,7 +17,12 @@
 }
 </style>
 <script>
+
+
+import ProfilePopup from "@/views/Profile/ProfilePopup.vue";
+
 export default {
-    name: "ProfilePost"
+    name: "ProfilePost",
+    components: {ProfilePopup}
 }
 </script>
