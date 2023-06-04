@@ -51,10 +51,10 @@
 import Button from "@/components/base/Button.vue";
 import TextField from "@/components/base/TextField.vue";
 import {User} from "@/services/user/User";
-import {Message, MessageType} from "@/Message";
-import {ServiceManager} from "@/services/ServiceManager";
+import {Message, MessageType} from "@/global/model/Message";
 import router from "@/router";
 import {Paths} from "@/router/routes";
+import {$system} from "@/global/system";
 
 export default {
     name: "Login",
@@ -80,14 +80,13 @@ export default {
                 this.$emit("message", new Message("A senha não pode ser vazia", MessageType.ERROR));
                 return;
             }
-            let user = ServiceManager.getInstance().user.getByNickname(this.nickname);
-            console.log(user);
+            let user = $system.services.user.getByNickname(this.nickname);
             if (user == null) {
                 this.$emit("message", new Message("Não existe usuário com o apelido associado", MessageType.ERROR));
             } else if (user.password !== this.password) {
                 this.$emit("message", new Message("Senha incorreta", MessageType.ERROR));
             } else {
-                localStorage.setItem("user", JSON.stringify(user));
+                $system.setUser(user);
                 router.push(Paths.TIMELINE);
             }
         }

@@ -8,7 +8,7 @@
 <script>
 
 import ServiceException from "@/services/ServiceException";
-import {Message, MessageType} from "@/Message";
+import {Message, MessageType} from "@/global/model/Message";
 import ResponseMessageBox from "@/components/ResponseMessageBox.vue";
 
 export default {

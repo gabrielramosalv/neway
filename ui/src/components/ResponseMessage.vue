@@ -43,7 +43,7 @@
 </style>
 
 <script>
-import {MessageType} from "@/Message";
+import {MessageType} from "@/global/model/Message";
 
 export default {
     name: "ResponseMessage",

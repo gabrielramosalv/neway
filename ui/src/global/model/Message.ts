@@ -8,7 +8,6 @@ export class Message {
         this._type = type;
     }
 
-
     get message(): string {
         return this._message;
     }
