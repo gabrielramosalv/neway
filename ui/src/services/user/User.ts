@@ -1,6 +1,6 @@
 import Entity from "@/services/Entity";
 import ServiceException from "@/services/ServiceException";
-import * as text from "@/utils/text";
+import * as text from "@/global/util/text";
 
 export class User extends Entity {
 

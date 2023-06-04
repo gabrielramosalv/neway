@@ -55,11 +55,11 @@
 <script>
 import Button from "@/components/base/Button.vue";
 import TextField from "@/components/base/TextField.vue";
-import {ServiceManager} from "@/services/ServiceManager";
-import {Message, MessageType} from "@/Message";
+import {Message, MessageType} from "@/global/model/Message";
 import router from "@/router";
 import {Paths} from "@/router/routes";
 import {User} from "@/services/user/User";
+import {$system} from "@/global/system";
 
 export default {
     name: "Register",
@@ -86,11 +86,11 @@ export default {
             }
             let user = new User(this.nickname, this.firstName, this.lastName, this.password);
             user.validate();
-            if (ServiceManager.getInstance().user.getByNickname(user.nickname) != null) {
+            if ($system.services.user.getByNickname(user.nickname) != null) {
                 this.$emit("message", new Message("Apelido já cadastrado", MessageType.ERROR));
                 return;
             }
-            ServiceManager.getInstance().user.save(user);
+            $system.services.user.save(user)
             this.$emit("message", new Message("Usuário registrado com sucesso", MessageType.SUCCESS));
             router.push(Paths.LOGIN);
         }
