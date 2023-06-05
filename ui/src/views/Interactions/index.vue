@@ -1,42 +1,44 @@
 <template>
-    <div class="interactions flex column align-i-center">
+  <div class="interactions flex column align-i-center">
 
-        <div class="interactions__leftbar">
-            <LeftBar/>
-        </div>
-
-        <h1 class="interactions__title">Suas interações</h1>
-        
-        <div class="interactions__button flex justify-c-center">
-            <button @click="interactionsTab($event, 'posts__liked')"
-            class="interactions__button__like t-w-bold t-c-aside active">Curtidas</button>
-            <button @click="interactionsTab($event, 'posts__saved')" 
-            class="interactions__button__save t-w-bold t-c-aside" >Salvos</button>
-        </div>
-
-        <div id="posts__liked" class="interactions__posts flex justify-c-center gap-1">
-            <interactions-post/>
-            <interactions-post/>
-            <interactions-post/>
-            <interactions-post/>
-            <interactions-post/>
-        </div>
-
-        <div id="posts__saved" class="interactions__posts flex justify-c-center gap-1">
-            <interactions-post/>
-            <interactions-post/>
-            <interactions-post/>
-        </div>
-
+    <div class="interactions__leftbar">
+      <LeftBar/>
     </div>
+
+    <h1 class="interactions__title">Suas interações</h1>
+
+    <div class="interactions__button flex justify-c-center">
+      <button @click="activeTab = 'posts__liked'" :class="{'active': activeTab === 'posts__liked'}"
+              class="interactions__button__liked t-w-bold t-c-aside">Curtidas</button>
+      <button @click="activeTab = 'posts__saved'" :class="{'active': activeTab === 'posts__saved'}"
+              class="interactions__button__saved t-w-bold t-c-aside">Salvos</button>
+    </div>
+
+    <div id="posts__liked" class="interactions__posts__liked flex justify-c-center gap-1"
+         v-if="activeTab === 'posts__liked'">
+      <interactions-post/>
+      <interactions-post/>
+      <interactions-post/>
+      <interactions-post/>
+      <interactions-post/>
+    </div>
+
+    <div id="posts__saved" class="interactions__posts__saved flex justify-c-center gap-1"
+         v-if="activeTab === 'posts__saved'">
+      <interactions-post/>
+      <interactions-post/>
+      <interactions-post/>
+    </div>
+
+  </div>
 </template>
 
 <style>
 
 .interactions {
-    margin-left: 300px;
+    margin-left: 280px;
     height: 100vh;
-    width:calc(100vw - 300px);
+    width:calc(100vw - 280px);
 }
 
 .interactions__title {
@@ -50,8 +52,8 @@
     margin-top: var(--ratio-2);
 }
 
-.interactions__button__like,
-.interactions__button__save {
+.interactions__button__liked,
+.interactions__button__saved {
     border: none;
     background: none;
     padding: var(--ratio-1);
@@ -59,13 +61,14 @@
     transition: color 0.2s;
 }
 
-.interactions__button__like.active,
-.interactions__button__save.active {
+.interactions__button__liked.active,
+.interactions__button__saved.active {
     color: var(--color-main-1);
     border-bottom: 2px solid var(--color-main-1);
 }
 
-.interactions__posts{
+.interactions__posts__liked,
+.interactions__posts__saved {
     flex-wrap: wrap;
     justify-content: left;
     padding: 0 0 var(--ratio-2) 0;
@@ -79,22 +82,12 @@
     import InteractionsPost from "@/views/Interactions/InteractionsPost.vue";
 
     export default {
-        name:"Interactions",
-        components: {LeftBar, InteractionsPost},
-        methods: {
-            interactionsTab(evt, tabName) {
-                var i, tabContent, tabLinks;
-                tabContent = document.getElementsByClassName("interactions__posts");
-                for (i = 0; i < tabContent.length; i++) {
-                    tabContent[i].style.display = "none";
-                }
-                tabLinks = document.getElementsByTagName("button");
-                for (i = 0; i < tabLinks.length; i++) {
-                    tabLinks[i].className = tabLinks[i].className.replace(" active", "");
-                }
-                document.getElementById(tabName).style.display = "flex";
-                evt.currentTarget.className += " active";
-            }
-        }
-    }
+    name: "Interactions",
+    components: { LeftBar, InteractionsPost },
+    data() {
+        return {
+        activeTab: "posts__liked",
+        };
+    },
+};
 </script>

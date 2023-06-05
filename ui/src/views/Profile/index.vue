@@ -84,16 +84,16 @@ import LeftBar from "@/layout/LeftBar.vue";
 import LeftBar from "@/components/layout/LeftBar.vue";
 import profilePost from "@/views/Profile/ProfilePost.vue";
 import textField from "@/components/base/TextField.vue";
-import {ServiceManager} from "@/services/ServiceManager";
+//import {ServiceManager} from "@/services/ServiceManager";
 
 export default {
     name: "Profile",
     components: {LeftBar, profilePost, textField},
 
-    mounted() {
+    /*mounted() {
         let user = ServiceManager.getInstance().user.getByNickname(this.$route.params.username)
         console.log(user)
-    }
+    }*/
 }
 
 </script>
