@@ -1,6 +1,7 @@
 :root {
     --color-main-1: #36147A;
     --color-main-2: #451e93;
+    --color-main-transparent-1: rgba(54, 20, 122, 0.15);
     --color-grey-1_2: rgb(248, 248, 248);
     --color-grey-1: rgb(241, 241, 241);
     --color-grey-2: rgb(225, 225, 225);
@@ -20,6 +21,8 @@
 
     --rounded-total: 999px;
 
-    --action-height: 45px;
+    --action-height: 44px;
     --action-side: var(--ratio-1);
+
+    --trace: 1px solid var(--color-grey-2);
 }

@@ -1,5 +1,5 @@
 <template>
-    <router-link v-bind:to="to" v-if="to != null" class="button t-w-bold flex align-i-center justify-c-center">
+    <router-link v-bind:to="to" v-if="to != null" class="button t-w-bold flex all-center">
         {{ content }}
     </router-link>
     <button class="button t-w-bold" v-else>

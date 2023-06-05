@@ -13,10 +13,6 @@ export enum Paths {
     INTERACTIONS = "/interactions"
 }
 
-export const getProfileByNickname = (nickname: string) => {
-    return Paths.PROFILE.replace(":username", nickname);
-}
-
 const routes: Array<RouteRecordRaw> = [
     {
         path: Paths.TIMELINE,

@@ -1,5 +1,5 @@
 <template>
-    <div class="popup-container flex align-i-center justify-c-center">
+    <div class="popup-container flex all-center">
         <div class="popup flex column gap-1">
             <header class="popup__header flex align-i-center justify-c-between">
                 <span class="t-s-headline t-w-bold">{{ title }}</span>
@@ -43,14 +43,15 @@
 .popup__close {
     height: 35px;
     aspect-ratio: 1/1;
+    background: url("@/assets/img/close-icon.svg") center no-repeat transparent;
+    background-size: 100%;
     border-radius: var(--rounded-total);
     border: none;
     cursor: pointer;
-    background-color: transparent;
 }
 
 .popup__close:hover {
-    background-color: var(--color-grey-1);
+    background-color: var(--color-grey-1_2);
 }
 
 </style>

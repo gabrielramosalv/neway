@@ -30,10 +30,23 @@
     align-items: flex-end;
 }
 
+.align-s-start {
+    align-self: flex-start;
+}
+
+.align-s-end {
+    align-self: flex-end;
+}
+
+.all-center {
+    align-items: center;
+    justify-content: center;
+}
+
 /** Distanciamento entre os elementos do container flex. */
 
 .gap-1_2 {
-    gap: calc(var(--ratio-1) / 2);
+    gap: calc(var(--ratio-1) / 1.5);
 }
 
 .gap-1 {
@@ -68,7 +81,7 @@
     width: 100% !important;
 }
 
-.height-full{
+.height-full {
     height: 100%;
 }
 

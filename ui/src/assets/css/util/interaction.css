@@ -2,3 +2,7 @@
     user-select: none;
     pointer-events: none;
 }
+
+.pointer {
+    cursor: pointer;
+}

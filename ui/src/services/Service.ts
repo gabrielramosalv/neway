@@ -13,8 +13,14 @@ export default abstract class<T extends Entity> {
             localStorage.setItem(this._key, JSON.stringify([]));
             return [];
         }
-        return JSON.parse(localStorage.getItem(this._key) || "[]");
+        const entities = JSON.parse(localStorage.getItem(this._key) || "[]");
+        entities.forEach((entity: T) => {
+            this.assign(entity);
+        });
+        return entities;
     }
+
+    protected abstract assign(entity: T): void;
 
     private saveEntities(entities: Array<T>): void {
         localStorage.setItem(this._key, JSON.stringify(entities));
@@ -22,7 +28,7 @@ export default abstract class<T extends Entity> {
 
     public save(entity: T) {
         const entities = this.getEntities();
-        const storedEntity = this.getOne(entity.id);
+        const storedEntity = this.getOne(entity.id, entities);
         if (storedEntity != null) {
             this.updateEntity(storedEntity, entity);
         } else {
@@ -32,8 +38,10 @@ export default abstract class<T extends Entity> {
         this.saveEntities(entities);
     }
 
-    public getOne(id: number): T | null {
-        const entities = this.getEntities();
+    public getOne(id: number, entities: Array<T> | null = null): T | null {
+        if (entities == null) {
+            entities = this.getEntities();
+        }
         const entityOptional = entities.filter((storedEntity) => storedEntity.id == id);
         if (entityOptional.length != 0) {
             return entityOptional[0];

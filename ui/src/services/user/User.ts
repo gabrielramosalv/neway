@@ -4,30 +4,40 @@ import * as text from "@/global/util/text";
 
 export class User extends Entity {
 
-    public nickname;
 
-    public firstName;
+    public nickname: string | null;
 
-    public lastName;
+    public name: string | null;
 
-    public password;
+    public password: string | null;
 
-    constructor(nickname: string, firstName: string, lastName: string, password: string) {
+    public bibliography: string | null;
+
+    private photo: string | null;
+
+    public likedPostIds: Array<number>;
+
+    public savedPostIds: Array<number>;
+
+    constructor(nickname: string | null = null, firstName: string | null = null, password: string | null = null) {
         super(0);
         this.nickname = nickname;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.name = firstName;
         this.password = password;
+        this.bibliography = null;
+        this.photo = null;
+        this.likedPostIds = [];
+        this.savedPostIds = [];
     }
 
     public validate(): void {
-        if (this.nickname.length == 0) {
+        if (this.nickname == null || this.nickname.length == 0) {
             throw new ServiceException("Apelido do usuário não preenchido");
         }
-        if (this.firstName.length == 0) {
+        if (this.name == null || this.name.length == 0) {
             throw new ServiceException("Primeiro nome do usuário não preenchido");
         }
-        if (this.password.length == 0) {
+        if (this.password == null || this.password.length == 0) {
             throw new ServiceException("Senha do usuário não preenchida");
         }
     }
@@ -37,6 +47,6 @@ export class User extends Entity {
     }
 
     public static nameFormatter(name: string): string {
-        return text.capitalize(text.justOneWord(name));
+        return text.capitalize(name);
     }
 }

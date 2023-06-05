@@ -1,8 +1,8 @@
 <template>
-    <input v-bind:type="type" class="text-field input t-w-bold" v-bind:placeholder="placeholder" v-if="type !==
+    <input v-bind:type="type" class="text-field input" v-bind:placeholder="placeholder" v-if="type !==
     'textarea'" v-bind:maxlength="maxlength" spellcheck="false" @input="change" v-bind:value="modelValue">
-    <textarea class="text-field textarea t-w-bold" v-bind:placeholder="placeholder" v-else :rows="rows"
-              v-bind:maxlength="maxlength" spellcheck="false"></textarea>
+    <textarea class="text-field textarea" v-bind:placeholder="placeholder" v-else :rows="rows"
+              v-bind:maxlength="maxlength" spellcheck="false" v-bind:value="modelValue" @input="change"></textarea>
 </template>
 
 <style scoped>
@@ -12,10 +12,11 @@
     border-radius: var(--rounded-1);
     background-color: transparent;
     outline: none;
+    transition: box-shadow 0.1s;
 }
 
 .text-field:focus {
-    border: 2px solid var(--color-main-1);
+    box-shadow: 0 0 0 1px var(--color-main-transparent-1);
 }
 
 .text-field.input {
@@ -48,11 +49,11 @@ export default {
             type: String
         },
         rows: {
-            default: "2",
-            type: String
+            default: 2,
+            type: Number
         },
         border: {
-            default: "2px solid var(--color-grey-2)",
+            default: "var(--trace)",
             type: String
         },
         formatter: {

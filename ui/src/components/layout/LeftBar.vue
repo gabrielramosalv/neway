@@ -13,7 +13,7 @@
             <button class="left-bar__button flex  align-i-center gap-1 width-full">
                 <span class="left-bar__button__image"></span>
                 <span>Publicar</span>
-                <CreatingPostPopup/>
+                <DoPostPopup v-bind:user="user" @message="$emit('message', $event)"/>
             </button>
         </div>
         <span class="left-bar__copyright">Copyright Neway @2023</span>
@@ -28,7 +28,8 @@
     height: 100vh;
     width: 300px;
     padding: var(--ratio-1);
-    border-right: 2px solid var(--color-grey-2);
+    border-right: var(--trace);
+    background-color: white;
 }
 
 .left-bar__copyright {
@@ -45,7 +46,6 @@
 
 .left-bar__button {
     border-radius: var(--rounded-2);
-    font-weight: 700;
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -61,17 +61,26 @@
     background-size: 100%;
     height: 25px;
     aspect-ratio: 1/1;
-    //border: 2px solid var(--color-main-1);
 }
 
 </style>
 
 <script>
 
-import CreatingPostPopup from "@/components/CreatingPostPopup.vue";
+import DoPostPopup from "@/components/DoPostPopup.vue";
+import {User} from "@/services/user/User";
+import {$system} from "@/global/system";
 
 export default {
     name: "LeftBar",
-    components: {CreatingPostPopup}
+    components: {DoPostPopup},
+    data() {
+        return {
+            user: User
+        }
+    },
+    mounted() {
+        this.user = $system.getUser();
+    }
 }
 </script>

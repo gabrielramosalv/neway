@@ -1,5 +1,5 @@
 <template>
-    <div :class="['message t-w-bold flex align-i-center justify-c-center', getTypeClass]">
+    <div :class="['message flex all-center', getTypeClass]">
         {{ message }}
     </div>
 </template>
@@ -10,7 +10,6 @@
     padding: 0 var(--action-side);
     height: var(--action-height);
     border-radius: var(--rounded-2);
-    z-index: 1000;
     position: relative;
 }
 
@@ -22,7 +21,8 @@
     left: 0;
     content: "";
     position: absolute;
-    border: 2px solid rgba(0, 0, 0, 0.15);
+    border: var(--trace);
+    border-color: rgba(0, 0, 0, 0.15);
     border-radius: var(--rounded-2);
 }
 

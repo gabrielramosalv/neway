@@ -2,8 +2,8 @@
     <article class="user-card flex align-i-center gap-1">
         <div class="user-card__photo"></div>
         <div class="flex column align-i-start">
-            <h3 class="user-card__name">{{ name }}</h3>
-            <span class="user-card__nickname">{{ nickname }}</span>
+            <h4 class="user-card__name">{{ resumedName }}</h4>
+            <span class="user-card__nickname">{{ user.nickname }}</span>
         </div>
     </article>
 </template>
@@ -47,14 +47,21 @@
 </style>
 
 <script>
+import {User} from "@/services/user/User";
+
 export default {
     name: "UserCard",
     props: {
-        name: String,
-        nickname: String,
+        user: User,
         ratio: {
             default: "40px",
             type: String
+        }
+    },
+    computed: {
+        resumedName() {
+            return this.user.name.substring(0, this.user.name.indexOf(" ")) +
+                this.user.name.substring(this.user.name.lastIndexOf(" "));
         }
     }
 }

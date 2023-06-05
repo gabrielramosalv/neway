@@ -1,5 +1,5 @@
 <template>
-    <label for="checkbox" class="checkbox flex align-i-center justify-c-center">
+    <label for="checkbox" class="checkbox flex all-center">
         <input type="checkbox" id="checkbox" @change="emit" ref="checkbox" :checked="modelValue">
     </label>
 </template>
@@ -15,7 +15,7 @@
     aspect-ratio: 1/1;
     border-radius: var(--rounded-total);
     background-color: transparent;
-    border: 2px solid var(--color-grey-2);
+    border: var(--trace);
     cursor: pointer;
 }
 

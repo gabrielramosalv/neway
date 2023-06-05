@@ -11,7 +11,7 @@
                     <text-field class="t-s-title" placeholder="Nome" maxlength="150" model-value="oi" border="none"/>
                     <text-field class="t-c-aside" placeholder="Apelido" maxlength="50" border="none"/>
                     <text-field class="profile__header__biografy" placeholder="Escreva sobre você..."
-                                type="textarea" maxlength="150" rows="5" border="none"/>
+                                type="textarea" maxlength="150" v-bind:rows="5" border="none"/>
                 </div>
             </article>
             <div class="profile__header__quatity flex gap-2">
@@ -85,7 +85,7 @@
 .profile__posts {
     flex-wrap: wrap;
     justify-content: left;
-    border-top: 2px solid var(--color-grey-2);
+    border-top: var(--trace);
     padding: var(--ratio-2) 0;
     width: calc(1050px + var(--ratio-1));
 }

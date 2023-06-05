@@ -55,6 +55,7 @@ import {Message, MessageType} from "@/global/model/Message";
 import router from "@/router";
 import {Paths} from "@/router/routes";
 import {$system} from "@/global/system";
+import {Events} from "@/global/Events";
 
 export default {
     name: "Login",
@@ -73,18 +74,18 @@ export default {
     methods: {
         login() {
             if (this.nickname.length === 0) {
-                this.$emit("message", new Message("O apelido não pode ser vazio", MessageType.ERROR));
+                this.$emit(Events.MESSAGE, new Message("O apelido não pode ser vazio", MessageType.ERROR));
                 return;
             }
             if (this.password.length === 0) {
-                this.$emit("message", new Message("A senha não pode ser vazia", MessageType.ERROR));
+                this.$emit(Events.MESSAGE, new Message("A senha não pode ser vazia", MessageType.ERROR));
                 return;
             }
             let user = $system.services.user.getByNickname(this.nickname);
             if (user == null) {
-                this.$emit("message", new Message("Não existe usuário com o apelido associado", MessageType.ERROR));
+                this.$emit(Events.MESSAGE, new Message("Não existe usuário com o apelido associado", MessageType.ERROR));
             } else if (user.password !== this.password) {
-                this.$emit("message", new Message("Senha incorreta", MessageType.ERROR));
+                this.$emit(Events.MESSAGE, new Message("Senha incorreta", MessageType.ERROR));
             } else {
                 $system.setUser(user);
                 router.push(Paths.TIMELINE);

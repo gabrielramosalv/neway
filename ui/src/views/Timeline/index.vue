@@ -1,19 +1,17 @@
 <template>
     <div class="timeline">
-
         <main class="timeline__main flex justify-c-center gap-2">
-            <LeftBar/>
-
+            <LeftBar @message="$emit('message', $event)"/>
             <section class="timeline__main__posts flex row align-i-start justify-c-center gap-2">
                 <div class="flex column gap-2">
-                    <Post/>
-                    <Post/>
-                    <Post/>
+                    <TimelinePost v-for="post in posts"
+                          v-bind:user="getUserFromPost(post)"
+                          v-bind:post="post"
+                          v-bind:key="post.id"/>
                 </div>
             </section>
-            <RightBar/>
+            <RightBar v-bind:user="user" v-bind:users="users"/>
         </main>
-
     </div>
 </template>
 
@@ -39,18 +37,38 @@
 </style>
 
 <script>
-import Post from "@/views/Timeline/TimelinePost.vue";
+import TimelinePost from "@/views/Timeline/TimelinePost.vue";
 import LeftBar from "@/components/layout/LeftBar.vue";
-import RightBar from "@/components/layout/RightBar.vue";
+import RightBar from "@/views/Timeline/RightBar.vue";
+import {$system} from "@/global/system";
+import router from "@/router";
+import {Paths} from "@/router/routes";
+import {User} from "@/services/user/User";
 
 export default {
     name: "Timeline",
-    components: {RightBar, LeftBar, Post},
+    components: {RightBar, LeftBar, TimelinePost},
     data() {
         return {
-            name: "Gabriel"
+            user: User,
+            posts: [],
+            users: []
         }
     },
-    methods: {}
+    setup() {
+        if ($system.getUser() == null) {
+            router.push(Paths.LOGIN);
+        }
+    },
+    mounted() {
+        this.user = $system.getUser();
+        this.posts = $system.services.post.getAll();
+        this.users = $system.services.user.getAllUnlessThisUser(this.user);
+    },
+    methods: {
+        getUserFromPost(post) {
+            return $system.services.user.getOne(post.userId);
+        }
+    }
 }
 </script>

@@ -5,8 +5,6 @@
             <div class="flex column gap-1">
                 <TextField type="text" placeholder="Primeiro nome" v-model="firstName"
                            v-bind:formatter="User.nameFormatter"/>
-                <TextField type="text" placeholder="Último nome" v-model="lastName"
-                           v-bind:formatter="User.nameFormatter"/>
                 <TextField type="text" placeholder="Apelido" v-model="nickname"
                            v-bind:formatter="User.nicknameFormatter"/>
                 <TextField type="password" placeholder="Senha" v-model="password"/>
@@ -60,6 +58,7 @@ import router from "@/router";
 import {Paths} from "@/router/routes";
 import {User} from "@/services/user/User";
 import {$system} from "@/global/system";
+import {Events} from "@/global/Events";
 
 export default {
     name: "Register",
@@ -72,7 +71,6 @@ export default {
     data() {
         return {
             firstName: "",
-            lastName: "",
             nickname: "",
             password: "",
             repeatPassword: ""
@@ -81,17 +79,17 @@ export default {
     methods: {
         register() {
             if (this.password !== this.repeatPassword) {
-                this.$emit("message", new Message("As senhas não coincidem", MessageType.ERROR));
+                this.$emit(Events.MESSAGE, new Message("As senhas não coincidem", MessageType.ERROR));
                 return;
             }
-            let user = new User(this.nickname, this.firstName, this.lastName, this.password);
+            let user = new User(this.nickname, this.firstName, this.password);
             user.validate();
             if ($system.services.user.getByNickname(user.nickname) != null) {
-                this.$emit("message", new Message("Apelido já cadastrado", MessageType.ERROR));
+                this.$emit(Events.MESSAGE, new Message("Apelido já cadastrado", MessageType.ERROR));
                 return;
             }
-            $system.services.user.save(user)
-            this.$emit("message", new Message("Usuário registrado com sucesso", MessageType.SUCCESS));
+            $system.services.user.save(user);
+            this.$emit(Events.MESSAGE, new Message("Usuário registrado com sucesso", MessageType.SUCCESS));
             router.push(Paths.LOGIN);
         }
     }
