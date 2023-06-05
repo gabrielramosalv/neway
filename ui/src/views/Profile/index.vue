@@ -1,9 +1,7 @@
 <template>
 
     <div class="profile flex column align-i-center">
-
         <LeftBar/>
-
         <div class="profile__header flex align-i-center ">
             <article class="profile__user-card flex align-i-center gap-2">
                 <div class="profile__user-card__photo"></div>
@@ -20,9 +18,6 @@
             </div>
         </div>
         <div class="profile__posts flex justify-c-center gap-1_2">
-            <profile-post/>
-            <profile-post/>
-            <profile-post/>
             <profile-post/>
             <profile-post/>
         </div>
@@ -43,33 +38,27 @@
 }
 
 .profile__user-card__photo {
-    height: v-bind(ratio);
+    height: 250px;
     aspect-ratio: 1/1;
     border-radius: var(--rounded-total);
     background: url("@/assets/img/joao.jpg") center no-repeat;
     background-size: 100%;
 }
 
-.profile__user-card__nickname {
-    font-size: 1em;
-    color: var(--color-text-aside-1);
-}
-
 .profile__header {
-    gap: 170px;
+    gap: 70px;
     padding: var(--ratio-2);
-    width: calc(1050px + var(--ratio-1));
 }
 
 .profile__header__quatity__friends {
     border-radius: var(--rounded-1);
-    padding: var(--ratio-1);
+    padding: 15px 40px;
     background-color: var(--color-grey-1);
 }
 
 .profile__header__quatity__post {
     border-radius: var(--rounded-1);
-    padding: var(--ratio-1);
+    padding: var(--ratio-1) 40px;
     background-color: var(--color-grey-1);
 }
 
@@ -95,18 +84,16 @@ import LeftBar from "@/layout/LeftBar.vue";
 import LeftBar from "@/components/layout/LeftBar.vue";
 import profilePost from "@/views/Profile/ProfilePost.vue";
 import textField from "@/components/base/TextField.vue";
+//import {ServiceManager} from "@/services/ServiceManager";
 
 export default {
     name: "Profile",
     components: {LeftBar, profilePost, textField},
-    props: {
-        name: String,
-        nickname: String,
-        ratio: {
-            default: "230px",
-            type: String
-        }
-    },
+
+    /*mounted() {
+        let user = ServiceManager.getInstance().user.getByNickname(this.$route.params.username)
+        console.log(user)
+    }*/
 }
 
 </script>

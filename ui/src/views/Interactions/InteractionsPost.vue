@@ -1,6 +1,10 @@
 <template>
     <article class="interactionsPost flex column gap-1">
 
+        <ProfilePopup>
+
+        </ProfilePopup>
+
         <header class="width-full"></header>
 
         <div class="interactionsPost__content flex column align-i-start justify-c-center"></div>
@@ -29,7 +33,10 @@
 
 </style>
 <script>
+import ProfilePopup from "@/views/Profile/ProfilePopup.vue";
+
 export default {
-    name: "InteractionsPost"
+    name: "InteractionsPost",
+    components: { ProfilePopup }
 }
 </script>
