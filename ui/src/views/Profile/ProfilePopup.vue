@@ -7,8 +7,8 @@
                     <div class="popup__interactions">
                         <div class="popup__interactions__user flex align-i-center gap-1_2">
                             <div class="popup__card__photo"></div>
-                            <h3 class="popup-card__name">joao:</h3>
-                            <span> texto de teste</span>
+                            <h3 class="popup-card__name t-w-bold">joao</h3>
+                            <span>Texto de teste</span>
                         </div>
                     </div>
                 </div>
@@ -21,7 +21,7 @@
 <style scoped>
 
 .popup__image{
-    height: auto;
+    height: 500px;
     width: 900px;
 }
 
@@ -42,7 +42,6 @@
 
 .popup-card__name {
     font-size: 1em;
-    font-weight: 600;
 }
 
 .popup__card__photo {

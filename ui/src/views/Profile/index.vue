@@ -8,7 +8,7 @@
                 <div class="flex column align-i-start gap-1_2">
                     <div class="flex gap-2">
                     <text-field class="t-s-title" placeholder="Nome" maxlength="150" model-value= "user" border="none"/>
-                    <button class="profile__button">Seguir +</button>
+                    <button @click="changeTitle" class="profile__button">{{titleButton}}</button>
                     </div>
                     <text-field class="t-c-aside" placeholder="Apelido" maxlength="50" border="none"/>
                     <text-field class="profile__header__biografy" placeholder="Escreva sobre você..."
@@ -33,12 +33,12 @@
     border-radius: var(--rounded-1);
     padding: var(--ratio-1) 40px;
     background-color: white;
-    border-color: var(--color-main-3);
+    border: 2px solid var(--color-main-3);
     font-weight: 600;
 }
 .profile__button:hover {
     background-color: var(--color-main-3); color: white;
-    transition: 0.5s;
+    transition: 0.3s;
     cursor: pointer;
 }
 .profile__button:focus{
@@ -106,6 +106,17 @@ import textField from "@/components/base/TextField.vue";
 export default {
     name: "Profile",
     components: {LeftBar, profilePost, textField},
-    
+
+    data() {
+        return {
+            titleButton: "Seguir +"
+        };
+    },
+
+    merhods: {
+        changeTitle(){
+            this.titleButton = "Seguindo";
+        }
+    }
 }
 </script>
