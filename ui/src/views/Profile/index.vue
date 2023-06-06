@@ -30,26 +30,21 @@
 
 <style scoped>
 
-.profile__button {
+.profile__button{
     border-radius: var(--rounded-1);
     padding: var(--ratio-1) 40px;
     background-color: white;
-    border-color: var(--color-main-3);
+    border: 2px solid var(--color-main-3);
     font-weight: 600;
 }
-
 .profile__button:hover {
-    background-color: var(--color-main-3);
-    color: white;
-    transition: 0.5s;
+    background-color: var(--color-main-3); color: white;
+    transition: 0.3s;
     cursor: pointer;
 }
-
-.profile__button:focus {
-    background-color: var(--color-main-3);
-    color: white;
+.profile__button:focus{
+    background-color: var(--color-main-3); color: white;
 }
-
 .profile {
     margin-left: 300px;
     height: 100vh;
@@ -112,6 +107,5 @@ import textField from "@/components/base/TextField.vue";
 export default {
     name: "Profile",
     components: {LeftBar, profilePost, textField},
-
 }
 </script>
