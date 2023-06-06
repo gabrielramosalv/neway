@@ -10,6 +10,7 @@
                         <span> texto de teste</span>
                         <button @click="$refs.profilePopup.close()" class="popup__close"/>
                     </div>
+                    <div class="popup__border"></div>
                 </div>
             </div>
         </template>
@@ -21,7 +22,7 @@
 
 .popup__image{
     height: auto;
-    width: 800px;
+    width: 900px;
 }
 
 .popup__interactions{
@@ -29,8 +30,9 @@
     width: 400px;
 }
 
-.popup__interactions__user{
-    border-bottom: 2px solid var(--color-grey-2);
+.popup__border{
+    padding: 5px;
+    border-bottom: 1px solid var(--color-grey-2);
 }
 
 .popup__card__photo{
@@ -58,10 +60,11 @@
 .popup__close {
     height: 35px;
     aspect-ratio: 1/1;
+    background: url("@/assets/img/close-icon.svg") center no-repeat transparent;
+    background-size: 100%;
     border-radius: var(--rounded-total);
     border: none;
     cursor: pointer;
-    background-color: transparent;
     margin-left: auto;
 }
 
