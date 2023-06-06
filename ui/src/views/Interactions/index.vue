@@ -1,59 +1,56 @@
 <template>
-  <div class="interactions flex column align-i-center">
+    <div class="flex">
+        <LeftBar/>
+        <div class="interactions flex column align-i-center gap-2">
 
-    <div class="interactions__leftbar">
-      <LeftBar/>
+            <h1 class="interactions__title no-select title">Suas interações</h1>
+            <div class="flex justify-c-center">
+                <button @click="activeTab = 1"
+                        :class="{'active': activeTab === 1}"
+                        class="interactions__button bold aside">
+                    Curtidas
+                </button>
+                <button @click="activeTab = 2"
+                        :class="{'active': activeTab === 2}"
+                        class="interactions__button bold aside">
+                    Salvos
+                </button>
+            </div>
+
+            <div class="interactions__posts width-full" v-if="activeTab === 1"
+                 :class="{'flex justify-c-center': likedPosts.length === 0}">
+                <div v-if="likedPosts.length > 0">
+                    <interactions-post v-for="post in likedPosts" :key="post.id"
+                                       :post="post"/>
+                </div>
+                <h4 v-else class="aside title">Não temos nada por aqui :/</h4>
+            </div>
+            <div class="interactions__posts width-full" v-if="activeTab === 2"
+                 :class="{'flex justify-c-center': likedPosts.length === 0}">
+                <div v-if="likedPosts.length > 0">
+                    <interactions-post v-for="post in savedPosts" :key="post.id"
+                                       :post="post"/>
+                </div>
+                <h4 v-else class="aside title">Não temos nada por aqui :/</h4>
+            </div>
+        </div>
     </div>
-
-    <h1 class="interactions__title">Suas interações</h1>
-
-    <div class="interactions__button flex justify-c-center">
-      <button @click="activeTab = 'posts__liked'" :class="{'active': activeTab === 'posts__liked'}"
-              class="interactions__button__liked t-w-bold t-c-aside">Curtidas</button>
-      <button @click="activeTab = 'posts__saved'" :class="{'active': activeTab === 'posts__saved'}"
-              class="interactions__button__saved t-w-bold t-c-aside">Salvos</button>
-    </div>
-
-    <div id="posts__liked" class="interactions__posts__liked flex justify-c-center gap-1_2"
-         v-if="activeTab === 'posts__liked'">
-      <interactions-post/>
-      <interactions-post/>
-      <interactions-post/>
-      <interactions-post/>
-      <interactions-post/>
-    </div>
-
-    <div id="posts__saved" class="interactions__posts__saved flex justify-c-center gap-1_2"
-         v-if="activeTab === 'posts__saved'">
-      <interactions-post/>
-      <interactions-post/>
-      <interactions-post/>
-    </div>
-
-  </div>
 </template>
 
 <style>
 
 .interactions {
-    margin-left: 280px;
+    margin-left: auto;
     height: 100vh;
-    width:calc(100vw - 280px);
+    width: calc(100vw - 300px);
+    padding: var(--ratio-2);
 }
 
 .interactions__title {
-    font-size: 2.5em;
-    margin-top: var(--ratio-2);
     color: var(--color-main-1);
-    user-select: none;
 }
 
 .interactions__button {
-    margin-top: var(--ratio-2);
-}
-
-.interactions__button__liked,
-.interactions__button__saved {
     border: none;
     background: none;
     padding: var(--ratio-1);
@@ -61,34 +58,47 @@
     transition: color 0.2s;
 }
 
-.interactions__button__liked.active,
-.interactions__button__saved.active {
+.interactions__button.active {
     color: var(--color-main-1);
     border-bottom: 2px solid var(--color-main-1);
 }
 
-.interactions__posts__liked,
-.interactions__posts__saved {
-    margin-top: var(--ratio-2);
-    flex-wrap: wrap;
-    justify-content: left;
-    padding: 0 0 var(--ratio-2) 0;
-    width: calc(1030px + var(--ratio-1));
+.interactions__posts {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-auto-rows: 350px;
+    grid-gap: var(--ratio-1);
+    padding: 0 var(--ratio-2);
+    padding-bottom: var(--ratio-2);
 }
 
 </style>
 
 <script>
-    import LeftBar from "@/components/layout/LeftBar.vue";
-    import InteractionsPost from "@/views/Interactions/InteractionsPost.vue";
+import LeftBar from "@/components/layout/LeftBar.vue";
+import InteractionsPost from "@/views/Interactions/InteractionsPost.vue";
+import {$system} from "@/global/system";
+import router from "@/router";
+import {Paths} from "@/router/routes";
 
-    export default {
+export default {
     name: "Interactions",
-    components: { LeftBar, InteractionsPost },
+    components: {InteractionsPost, LeftBar},
     data() {
         return {
-        activeTab: "posts__liked",
-        };
+            activeTab: 1,
+            likedPosts: [],
+            savedPosts: []
+        }
     },
-};
+    mounted() {
+        const user = $system.getUser();
+        if (user == null) {
+            router.push(Paths.LOGIN);
+            return;
+        }
+        this.likedPosts = $system.services.post.getAllLikedByUser(user);
+        this.savedPosts = $system.services.post.getAllSavedByUser(user);
+    }
+}
 </script>

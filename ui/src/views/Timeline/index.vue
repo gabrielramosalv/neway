@@ -55,13 +55,13 @@ export default {
             users: []
         }
     },
-    setup() {
-        if ($system.getUser() == null) {
-            router.push(Paths.LOGIN);
-        }
-    },
     mounted() {
-        this.user = $system.getUser();
+        const user = $system.getUser();
+        if (user == null) {
+            router.push(Paths.LOGIN);
+            return;
+        }
+        this.user = user;
         this.users = $system.services.user.getAllUnlessThisUser(this.user);
         this.loadPosts();
     },

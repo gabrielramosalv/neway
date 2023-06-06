@@ -7,10 +7,11 @@
                 <div class="profile__user-card__photo"></div>
                 <div class="flex column align-i-start gap-1_2">
                     <div class="flex gap-2">
-                    <text-field class="t-s-title" placeholder="Nome" maxlength="150" model-value= "user" border="none"/>
-                    <button class="profile__button">Seguir +</button>
+                        <text-field class="title" placeholder="Nome" maxlength="150" model-value="user"
+                                    border="none"/>
+                        <button class="profile__button">Seguir +</button>
                     </div>
-                    <text-field class="t-c-aside" placeholder="Apelido" maxlength="50" border="none"/>
+                    <text-field class="aside" placeholder="Apelido" maxlength="50" border="none"/>
                     <text-field class="profile__header__biografy" placeholder="Escreva sobre você..."
                                 type="textarea" maxlength="150" v-bind:rows="5" border="none"/>
                 </div>
@@ -29,21 +30,26 @@
 
 <style scoped>
 
-.profile__button{
+.profile__button {
     border-radius: var(--rounded-1);
     padding: var(--ratio-1) 40px;
     background-color: white;
     border-color: var(--color-main-3);
     font-weight: 600;
 }
+
 .profile__button:hover {
-    background-color: var(--color-main-3); color: white;
+    background-color: var(--color-main-3);
+    color: white;
     transition: 0.5s;
     cursor: pointer;
 }
-.profile__button:focus{
-    background-color: var(--color-main-3); color: white;
+
+.profile__button:focus {
+    background-color: var(--color-main-3);
+    color: white;
 }
+
 .profile {
     margin-left: 300px;
     height: 100vh;
@@ -106,6 +112,6 @@ import textField from "@/components/base/TextField.vue";
 export default {
     name: "Profile",
     components: {LeftBar, profilePost, textField},
-    
+
 }
 </script>

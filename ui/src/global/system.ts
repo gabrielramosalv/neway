@@ -10,7 +10,7 @@ export const $system = {
     setUser: (user: User) => {
         localStorage.setItem("user", JSON.stringify(user));
     },
-    removeUser: (user: User) => {
+    removeUser: () => {
         localStorage.removeItem("user");
     },
     getUser: (): User | null => {

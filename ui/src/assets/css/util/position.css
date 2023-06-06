@@ -1,7 +1,7 @@
 /** Definições de containers e filhos flex. */
 
 .flex {
-    display: flex;
+    display: flex !important;
 }
 
 .row {
@@ -88,4 +88,8 @@
 .inset-screen {
     width: 100vw;
     height: 100vh;
+}
+
+.absolute {
+    position: absolute;
 }

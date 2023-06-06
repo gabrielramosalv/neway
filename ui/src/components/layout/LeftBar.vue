@@ -1,22 +1,25 @@
 <template>
     <nav class="left-bar flex column gap-1">
         <h2 class="left-bar__logo">Neway</h2>
-        <div class="flex column">
-            <button class="left-bar__button flex  align-i-center gap-1 width-full">
+        <div class="flex column height-full">
+            <router-link class="left-bar__button home flex align-i-center gap-1 width-full" :to="Paths.TIMELINE">
                 <span class="left-bar__button__image"></span>
                 <span>Início</span>
-            </button>
-            <button class="left-bar__button flex  align-i-center gap-1 width-full">
+            </router-link>
+            <router-link class="left-bar__button flex align-i-center gap-1 width-full" :to="Paths.INTERACTIONS">
                 <span class="left-bar__button__image"></span>
                 <span>Interações</span>
-            </button>
-            <button class="left-bar__button flex  align-i-center gap-1 width-full">
+            </router-link>
+            <button class="left-bar__button publish flex align-i-center gap-1 width-full">
                 <span class="left-bar__button__image"></span>
                 <span>Publicar</span>
                 <DoPostPopup v-bind:user="user" @message="$emit('message', $event)" @new-post="$emit('new-post')"/>
             </button>
+            <button class="left-bar__button exit flex align-i-center gap-1 width-full" @click="exit">
+                <span class="left-bar__button__image"></span>
+                <span>Encerrar sessão</span>
+            </button>
         </div>
-        <span class="left-bar__copyright">Copyright Neway @2023</span>
     </nav>
 </template>
 
@@ -32,11 +35,6 @@
     background-color: white;
 }
 
-.left-bar__copyright {
-    color: var(--color-text-aside-1);
-    margin-top: auto;
-}
-
 .left-bar__logo {
     font-size: 2.5em;
     color: var(--color-main-1);
@@ -45,6 +43,7 @@
 }
 
 .left-bar__button {
+    color: var(--color-text-main-1);
     border-radius: var(--rounded-2);
     background-color: transparent;
     border: none;
@@ -57,10 +56,28 @@
 }
 
 .left-bar__button__image {
-    background: url("@/assets/img/Vector.svg") center no-repeat;
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: 100%;
-    height: 25px;
+    width: 20px;
     aspect-ratio: 1/1;
+}
+
+.left-bar__button.exit {
+    margin-top: auto;
+    color: var(--color-red-1);
+}
+
+.left-bar__button.exit > .left-bar__button__image {
+    background-image: url("@/assets/img/exit-icon.svg");
+}
+
+.left-bar__button.home > .left-bar__button__image {
+    background-image: url("@/assets/img/home-icon.svg");
+}
+
+.left-bar__button.publish > .left-bar__button__image {
+    background-image: url("@/assets/img/publish-icon.svg");
 }
 
 </style>
@@ -70,13 +87,26 @@
 import DoPostPopup from "@/components/DoPostPopup.vue";
 import {User} from "@/services/user/User";
 import {$system} from "@/global/system";
+import {Paths} from "@/router/routes";
+import router from "@/router";
 
 export default {
     name: "LeftBar",
+    computed: {
+        Paths() {
+            return Paths
+        }
+    },
     components: {DoPostPopup},
     data() {
         return {
             user: User
+        }
+    },
+    methods: {
+        exit() {
+            $system.removeUser();
+            router.push(Paths.LOGIN);
         }
     },
     mounted() {

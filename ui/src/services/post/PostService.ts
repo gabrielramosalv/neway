@@ -24,6 +24,7 @@ export default class extends Service<Post> {
     }
 
     public doLike(post: Post, user: User): boolean {
+        console.log(user);
         if (!user.likedPostIds.includes(post.id)) {
             post.likes += 1;
             super.save(post);
@@ -43,6 +44,14 @@ export default class extends Service<Post> {
         return super.getAll().sort((post1, post2) => {
             return new Date(post1.dateString || 0).getTime() > new Date(post2.dateString || 0).getTime() ? -1 : 1;
         });
+    }
+
+    public getAllLikedByUser(user: User): Array<Post> {
+        return this.getAllSortByRecent().filter(post => user.likedPostIds.includes(post.id));
+    }
+
+    public getAllSavedByUser(user: User): Array<Post> {
+        return this.getAllSortByRecent().filter(post => user.savedPostIds.includes(post.id));
     }
 
     public doSave(post: Post, user: User): boolean {

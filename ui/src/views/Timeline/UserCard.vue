@@ -1,11 +1,11 @@
 <template>
-    <article class="user-card flex align-i-center gap-1">
+    <router-link :to="profileLink" class="user-card flex align-i-center gap-1">
         <div class="user-card__photo"></div>
         <div class="flex column align-i-start">
             <h4 class="user-card__name">{{ resumedName }}</h4>
             <span class="user-card__nickname">{{ user.nickname }}</span>
         </div>
-    </article>
+    </router-link>
 </template>
 
 <style scoped>
@@ -17,6 +17,7 @@
     cursor: pointer;
     user-select: none;
     transition: transform 0.3s;
+    color: var(--color-text-main-1);
 }
 
 .user-card:active {
@@ -62,6 +63,9 @@ export default {
         resumedName() {
             return this.user.name.substring(0, this.user.name.indexOf(" ")) +
                 this.user.name.substring(this.user.name.lastIndexOf(" "));
+        },
+        profileLink() {
+            return "@" + this.user.nickname;
         }
     }
 }

@@ -54,7 +54,11 @@ export default {
         }
     },
     mounted() {
-        this.user = $system.getUser();
+        const user = $system.getUser();
+        if (user == null) {
+            return;
+        }
+        this.user = user;
         this.users = $system.services.user.getAllUnlessThisUser(this.user);
     },
     watch: {

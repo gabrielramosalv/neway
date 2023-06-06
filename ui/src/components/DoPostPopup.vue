@@ -120,13 +120,14 @@ export default {
                     post.image = fr.result;
                     $system.services.post.save(post);
                     this.$refs.doPostPopup.close();
+                    this.$emit("new-post");
                 }
                 fr.readAsDataURL(image);
             } else {
                 $system.services.post.save(post);
                 this.$refs.doPostPopup.close();
+                this.$emit("new-post");
             }
-            this.$emit("new-post");
             this.$refs.image.src = this.loadImagePhoto;
             this.text = "";
             this.$refs.imageInput.value = "";

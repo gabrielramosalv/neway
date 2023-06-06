@@ -7,7 +7,7 @@
                 </router-link>
                 <span class="post__header__user__name no-select">{{ user.nickname }}</span>
             </div>
-            <span class="t-s-minor t-c-aside no-select">{{ this.getDateString }}</span>
+            <span class="minor aside no-select">{{ this.getDateString }}</span>
         </header>
 
         <img class="post__content" alt="photo" v-if="hasImage" v-bind:src="post.image"/>
@@ -22,7 +22,7 @@
                 <button :class="['post__interaction hang-loose flex gap-1_2 align-i-center', alreadyLiked ?
                 'already-liked' : '']" @click="doLike">
                     <img :src="hangLooseIcon" alt="hang-loose-icon" ref="hangLooseIcon">
-                    <span class="t-s-minor">{{ post.likes }}</span>
+                    <span class="minor">{{ post.likes }}</span>
                 </button>
                 <button class="post__interaction save flex gap-1_2 all-center" @click="doSave">
                     <img :src="saveIcon" alt="save-icon" ref="saveIcon">
@@ -172,13 +172,13 @@ export default {
             if (!this.alreadyLiked) {
                 this.doLikeAnimation();
             }
-            this.alreadyLiked = $system.services.post.doLike(this.post, this.user);
+            this.alreadyLiked = $system.services.post.doLike(this.post, $system.getUser());
         },
         doSave() {
             if (!this.alreadySaved) {
                 this.doSaveAnimation();
             }
-            this.alreadySaved = $system.services.post.doSave(this.post, this.user);
+            this.alreadySaved = $system.services.post.doSave(this.post, $system.getUser());
         },
         doSaveAnimation() {
             this.$refs.saveIcon.style.transform = "rotate(10deg)";
@@ -210,6 +210,14 @@ export default {
             }, 50);
         }
     },
+    unmounted() {
+        let id = window.setTimeout(function () {
+            //
+        }, 0);
+        while (id--) {
+            window.clearTimeout(id);
+        }
+    },
     computed: {
         hasImage() {
             return this.post.image != null;
@@ -222,20 +230,22 @@ export default {
         },
         getDateString() {
             const date = new Date(this.post.dateString);
-            const formatedDay = date.getDay() > 9 ? date.getDate() : `0${date.getDate()}`;
-            const formatedMonth = date.getMonth() > 9 ? date.getMonth() : `0${date.getMonth()}`;
+            const formatedDay = date.getDay() >= 10 ? date.getDate() : `0${date.getDate()}`;
+            const formatedMonth = date.getMonth() >= 10 ? date.getMonth() : `0${date.getMonth()}`;
+            const formatedHour = date.getHours() >= 10 ? date.getHours() : `0${date.getHours()}`;
+            const formatedMinutes = date.getMinutes() >= 10 ? date.getMinutes() : `0${date.getMinutes()}`;
 
             const today = new Date();
             if (today.getMonth() === date.getMonth() && today.getFullYear() === date.getFullYear()) {
                 if (today.getDate() === date.getDate()) {
-                    return `Hoje às ${date.getHours()}:${date.getMinutes()}`
+                    return `Hoje às ${formatedHour}:${formatedMinutes}`
                 } else if ((today.getDate() - date.getDate()) === 1) {
-                    return `Ontem às ${date.getHours()}:${date.getMinutes()}`
+                    return `Ontem às ${formatedHour}:${formatedMinutes}`
                 } else {
-                    return `${formatedDay}/${formatedMonth} às ${date.getHours()}:${date.getMinutes()}`
+                    return `${formatedDay}/${formatedMonth} às ${formatedHour}:${formatedMinutes}`
                 }
             } else {
-                return `${formatedDay}/${formatedMonth}/${date.getFullYear()} às ${date.getHours()}:${date.getMinutes()}`
+                return `${formatedDay}/${formatedMonth}/${formatedHour} às ${formatedHour}:${formatedMinutes}`
             }
         }
     }

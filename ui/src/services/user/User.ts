@@ -19,6 +19,8 @@ export class User extends Entity {
 
     public savedPostIds: Array<number>;
 
+    public followIds: Array<number>;
+
     constructor(nickname: string | null = null, firstName: string | null = null, password: string | null = null) {
         super(0);
         this.nickname = nickname;
@@ -28,6 +30,7 @@ export class User extends Entity {
         this.photo = null;
         this.likedPostIds = [];
         this.savedPostIds = [];
+        this.followIds = [];
     }
 
     public validate(): void {

@@ -39,6 +39,17 @@ export default class extends Service<User> {
             .filter(user => user.name?.toLowerCase().startsWith(search) || user.nickname?.toLowerCase().startsWith(search));
     }
 
+    public doFollow(user: User, followed: User): boolean {
+        if (!user.followIds.includes(followed.id)) {
+            user.followIds.push(followed.id);
+            super.save(user);
+            return true;
+        } else {
+            user.followIds.splice(user.followIds.indexOf(followed.id), 1);
+            super.save(user);
+            return false;
+        }
+    }
 
     public save(entity: User) {
         if (entity.id == $system.getUser()?.id) {
