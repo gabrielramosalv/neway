@@ -1,5 +1,5 @@
 <template>
-    <Popup title="Criar publicação" ref="doPostPopup">
+    <Popup :header="true" title="Criar publicação" ref="doPostPopup">
         <template v-slot:content>
             <div class="flex column gap-1 align-i-end">
                 <div class="flex column align-i-center gap-1 width-full">

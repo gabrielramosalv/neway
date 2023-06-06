@@ -1,9 +1,7 @@
 <template>
-    <article class="interactionsPost flex column gap-1">
+    <article class="interactionsPost flex column">
 
-        <ProfilePopup>
-
-        </ProfilePopup>
+        <ProfilePopup/>
 
         <header class="width-full"></header>
 

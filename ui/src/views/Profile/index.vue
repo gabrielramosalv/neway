@@ -6,7 +6,10 @@
             <article class="profile__user-card flex align-i-center gap-2">
                 <div class="profile__user-card__photo"></div>
                 <div class="flex column align-i-start gap-1_2">
-                    <text-field class="t-s-title" placeholder="Nome" maxlength="150" model-value="oi" border="none"/>
+                    <div class="flex gap-2">
+                    <text-field class="t-s-title" placeholder="Nome" maxlength="150" model-value= "user" border="none"/>
+                    <button class="profile__button">Seguir +</button>
+                    </div>
                     <text-field class="t-c-aside" placeholder="Apelido" maxlength="50" border="none"/>
                     <text-field class="profile__header__biografy" placeholder="Escreva sobre você..."
                                 type="textarea" maxlength="150" v-bind:rows="5" border="none"/>
@@ -26,6 +29,21 @@
 
 <style scoped>
 
+.profile__button{
+    border-radius: var(--rounded-1);
+    padding: 15px 40px;
+    background-color: var(--color-grey-2);
+    font-weight: 600;
+    border: none;
+}
+.profile__button:hover {
+    background-color: var(--color-main-3); color: white;
+    transition: 0.5s;
+    cursor: pointer;
+}
+.profile__button:focus{
+    background-color: var(--color-main-3); color: white;
+}
 .profile {
     margin-left: 300px;
     height: 100vh;
@@ -79,21 +97,16 @@
     width: calc(1050px + var(--ratio-1));
 }
 </style>
-import LeftBar from "@/layout/LeftBar.vue";
+
 <script>
+
 import LeftBar from "@/components/layout/LeftBar.vue";
 import profilePost from "@/views/Profile/ProfilePost.vue";
 import textField from "@/components/base/TextField.vue";
-//import {ServiceManager} from "@/services/ServiceManager";
 
 export default {
     name: "Profile",
     components: {LeftBar, profilePost, textField},
-
-    /*mounted() {
-        let user = ServiceManager.getInstance().user.getByNickname(this.$route.params.username)
-        console.log(user)
-    }*/
+    
 }
-
 </script>

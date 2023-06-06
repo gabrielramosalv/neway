@@ -14,7 +14,7 @@
               class="interactions__button__saved t-w-bold t-c-aside">Salvos</button>
     </div>
 
-    <div id="posts__liked" class="interactions__posts__liked flex justify-c-center gap-1"
+    <div id="posts__liked" class="interactions__posts__liked flex justify-c-center gap-1_2"
          v-if="activeTab === 'posts__liked'">
       <interactions-post/>
       <interactions-post/>
@@ -23,7 +23,7 @@
       <interactions-post/>
     </div>
 
-    <div id="posts__saved" class="interactions__posts__saved flex justify-c-center gap-1"
+    <div id="posts__saved" class="interactions__posts__saved flex justify-c-center gap-1_2"
          v-if="activeTab === 'posts__saved'">
       <interactions-post/>
       <interactions-post/>
@@ -69,6 +69,7 @@
 
 .interactions__posts__liked,
 .interactions__posts__saved {
+    margin-top: var(--ratio-2);
     flex-wrap: wrap;
     justify-content: left;
     padding: 0 0 var(--ratio-2) 0;
