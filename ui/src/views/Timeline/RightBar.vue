@@ -2,7 +2,7 @@
     <nav class="right-bar flex column align-i-start gap-1">
         <UserCard v-bind:user="user" ratio="50px" border-color="var(--color-main-1)"/>
         <section class="flex column gap-1 width-full">
-            <TextField type="search" placeholder="Procure pessoas no Neway"/>
+            <TextField type="search" placeholder="Procure pessoas no Neway" v-model="usersSearch"/>
             <div class="right-bar__friends-list flex column">
                 <UserCard v-for="user in users" v-bind:user="user" v-bind:key="user.id"/>
                 <div class="right-bar__friends-list__fade"></div>
@@ -41,13 +41,26 @@
 
 import UserCard from "@/views/Timeline/UserCard.vue";
 import TextField from "@/components/base/TextField.vue";
+import {$system} from "@/global/system";
 import {User} from "@/services/user/User";
 
 export default {
     name: "RightBar",
-    props: {
-        users: [],
-        user: User
+    data() {
+        return {
+            usersSearch: "",
+            users: [],
+            user: User
+        }
+    },
+    mounted() {
+        this.user = $system.getUser();
+        this.users = $system.services.user.getAllUnlessThisUser(this.user);
+    },
+    watch: {
+        usersSearch(newValue) {
+            this.users = $system.services.user.getAllByNameOrNicknameUnlessThisUser(newValue, this.user);
+        }
     },
     components: {TextField, UserCard}
 }

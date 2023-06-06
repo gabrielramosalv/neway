@@ -26,14 +26,36 @@ export default class extends Service<Post> {
     public doLike(post: Post, user: User): boolean {
         if (!user.likedPostIds.includes(post.id)) {
             post.likes += 1;
-            this.save(post);
+            super.save(post);
             user.likedPostIds.push(post.id);
             $system.services.user.save(user);
             return true;
         } else {
             post.likes -= 1;
-            this.save(post);
+            super.save(post);
             user.likedPostIds.splice(user.likedPostIds.indexOf(post.id), 1);
+            $system.services.user.save(user);
+            return false;
+        }
+    }
+
+    public getAllSortByRecent(): Array<Post> {
+        return super.getAll().sort((post1, post2) => {
+            return new Date(post1.dateString || 0).getTime() > new Date(post2.dateString || 0).getTime() ? -1 : 1;
+        });
+    }
+
+    public doSave(post: Post, user: User): boolean {
+        if (!user.savedPostIds.includes(post.id)) {
+            post.saves += 1;
+            super.save(post);
+            user.savedPostIds.push(post.id);
+            $system.services.user.save(user);
+            return true;
+        } else {
+            post.saves -= 1;
+            super.save(post);
+            user.savedPostIds.splice(user.savedPostIds.indexOf(post.id), 1);
             $system.services.user.save(user);
             return false;
         }

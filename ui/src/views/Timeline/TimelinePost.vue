@@ -1,6 +1,6 @@
 <template>
     <article class="post flex column gap-1">
-        <header class="flex justify-c-between align-i-center width-full">
+        <header class="post__header flex justify-c-between align-i-center width-full">
             <div class="flex align-i-center gap-1">
                 <router-link v-bind:to="getProfileByNickname()">
                     <div class="post__header__user__photo pointer"></div>
@@ -12,8 +12,9 @@
 
         <img class="post__content" alt="photo" v-if="hasImage" v-bind:src="post.image"/>
 
-        <footer v-bind:class="['flex align-i-center justify-c-between width-full', !hasImage ? 'column' : 'gap-1']">
-            <p class="post__caption align-s-start" :style="hasImage ? 'margin: auto 0;' : ''">
+        <div v-bind:class="['post__bottom flex align-i-center justify-c-between width-full', !hasImage ? 'column'
+         : 'gap-1']">
+            <p v-bind:class="['post__bottom__text align-s-start no-select', hasImage ? 'caption' : 'content']">
                 {{ post.text }}
             </p>
             <hr v-if="!hasImage" class="post__separator">
@@ -23,26 +24,31 @@
                     <img :src="hangLooseIcon" alt="hang-loose-icon" ref="hangLooseIcon">
                     <span class="t-s-minor">{{ post.likes }}</span>
                 </button>
-                <button class="post__interaction save flex gap-1_2 all-center">
-                    <img src="@/assets/img/save-icon.svg" alt="save-icon">
+                <button class="post__interaction save flex gap-1_2 all-center" @click="doSave">
+                    <img :src="saveIcon" alt="save-icon" ref="saveIcon">
                 </button>
             </div>
-        </footer>
+        </div>
     </article>
 </template>
 
 <style scoped>
 
 .post {
-    --post-content-ratio: calc(420px + 2vw);
+    --post-content-ratio: calc(425px + 2vw);
     width: var(--post-content-ratio);
 }
 
-.post__content {
-    height: var(--post-content-ratio);
-    background-color: var(--color-grey-1);
+.post__bottom {
     border-radius: var(--rounded-2);
-    object-fit: contain;
+    border: var(--trace);
+}
+
+.post__content {
+    min-height: var(--post-content-ratio);
+    max-height: 550px;
+    border-radius: var(--rounded-2);
+    object-fit: cover;
     cursor: pointer;
 }
 
@@ -60,10 +66,20 @@
     font-weight: 600;
 }
 
-.post__caption {
+.post__bottom__text {
+    display: block;
+}
+
+.post__bottom__text.content {
+    margin: var(--ratio-1);
+    line-height: 1.5;
+}
+
+.post__bottom__text.caption {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    margin: auto 0 auto 20px;
 }
 
 .post__separator {
@@ -71,16 +87,15 @@
     width: 100%;
     background-color: var(--color-grey-2);
     border: none;
-    margin-top: var(--ratio-1);
-    margin-bottom: calc(var(--ratio-1) / 2);
 }
 
 .post__interaction {
     cursor: pointer;
     border: none;
     height: var(--action-height);
-    border-radius: var(--rounded-total);
+    border-radius: var(--rounded-1);
     background-color: transparent;
+    margin: 5px;
 }
 
 .post__interaction:hover {
@@ -96,10 +111,13 @@
     width: var(--action-height);
 }
 
+.post__interaction > img {
+    transition: transform 0.2s;
+}
+
 .post__interaction.hang-loose > img {
     width: 18px;
     aspect-ratio: 1/1;
-    transition: transform 0.2s;
 }
 
 .post__interaction.hang-loose.already-liked > img {
@@ -131,8 +149,10 @@ export default {
             currentUser: new User(),
             alreadyLiked: false,
             alreadySaved: false,
-            likedIcon: require('@/assets/img/hang-loose-interacted-icon.svg'),
-            likeIcon: require('@/assets/img/hang-loose-icon.svg')
+            hangLooseSvg: require('@/assets/img/hang-loose-interacted-icon.svg'),
+            hangLooseInteractedSvg: require('@/assets/img/hang-loose-icon.svg'),
+            saveSvg: require('@/assets/img/save-icon.svg'),
+            savedSvg: require('@/assets/img/save-interacted-icon.svg')
         }
     },
     mounted() {
@@ -153,6 +173,21 @@ export default {
                 this.doLikeAnimation();
             }
             this.alreadyLiked = $system.services.post.doLike(this.post, this.user);
+        },
+        doSave() {
+            if (!this.alreadySaved) {
+                this.doSaveAnimation();
+            }
+            this.alreadySaved = $system.services.post.doSave(this.post, this.user);
+        },
+        doSaveAnimation() {
+            this.$refs.saveIcon.style.transform = "rotate(10deg)";
+            setTimeout(() => {
+                this.$refs.saveIcon.style.transform = "rotate(-10deg)";
+                setTimeout(() => {
+                    this.$refs.saveIcon.style.removeProperty("transform");
+                }, 200);
+            }, 200);
         },
         doLikeAnimation() {
             const SCALE = "scale(1.2) translateY(-10%)";
@@ -180,7 +215,10 @@ export default {
             return this.post.image != null;
         },
         hangLooseIcon() {
-            return this.alreadyLiked ? this.likedIcon : this.likeIcon;
+            return this.alreadyLiked ? this.hangLooseSvg : this.hangLooseInteractedSvg;
+        },
+        saveIcon() {
+            return this.alreadySaved ? this.savedSvg : this.saveSvg;
         },
         getDateString() {
             const date = new Date(this.post.dateString);

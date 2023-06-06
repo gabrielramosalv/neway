@@ -1,7 +1,7 @@
 <template>
     <div class="timeline">
         <main class="timeline__main flex justify-c-center gap-2">
-            <LeftBar @message="$emit('message', $event)"/>
+            <LeftBar @message="$emit('message', $event)" @new-post="loadPosts"/>
             <section class="timeline__main__posts flex row align-i-start justify-c-center gap-2">
                 <div class="flex column gap-2">
                     <TimelinePost v-for="post in posts"
@@ -10,7 +10,7 @@
                           v-bind:key="post.id"/>
                 </div>
             </section>
-            <RightBar v-bind:user="user" v-bind:users="users"/>
+            <RightBar/>
         </main>
     </div>
 </template>
@@ -62,10 +62,13 @@ export default {
     },
     mounted() {
         this.user = $system.getUser();
-        this.posts = $system.services.post.getAll();
         this.users = $system.services.user.getAllUnlessThisUser(this.user);
+        this.loadPosts();
     },
     methods: {
+        loadPosts() {
+            this.posts = $system.services.post.getAllSortByRecent();
+        },
         getUserFromPost(post) {
             return $system.services.user.getOne(post.userId);
         }

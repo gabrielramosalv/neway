@@ -126,6 +126,10 @@ export default {
                 $system.services.post.save(post);
                 this.$refs.doPostPopup.close();
             }
+            this.$emit("new-post");
+            this.$refs.image.src = this.loadImagePhoto;
+            this.text = "";
+            this.$refs.imageInput.value = "";
         },
         loadImage() {
             let image = this.$refs.imageInput.files[0] || null;

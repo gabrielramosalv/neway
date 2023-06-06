@@ -69,6 +69,7 @@ export default {
             default: "fit-content"
         },
         header: {
+            default: true,
             type: Boolean
         }
     },

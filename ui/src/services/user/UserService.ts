@@ -30,6 +30,15 @@ export default class extends Service<User> {
         return super.getAll().filter(user => user.id !== thisUser.id);
     }
 
+    public getAllByNameOrNicknameUnlessThisUser(search: string, thisUser: User): Array<User> {
+        if (search.length === 0) {
+            return this.getAllUnlessThisUser(thisUser);
+        }
+        search = search.toLowerCase();
+        return this.getAllUnlessThisUser(thisUser)
+            .filter(user => user.name?.toLowerCase().startsWith(search) || user.nickname?.toLowerCase().startsWith(search));
+    }
+
 
     public save(entity: User) {
         if (entity.id == $system.getUser()?.id) {

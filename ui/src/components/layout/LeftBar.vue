@@ -13,7 +13,7 @@
             <button class="left-bar__button flex  align-i-center gap-1 width-full">
                 <span class="left-bar__button__image"></span>
                 <span>Publicar</span>
-                <DoPostPopup v-bind:user="user" @message="$emit('message', $event)"/>
+                <DoPostPopup v-bind:user="user" @message="$emit('message', $event)" @new-post="$emit('new-post')"/>
             </button>
         </div>
         <span class="left-bar__copyright">Copyright Neway @2023</span>
