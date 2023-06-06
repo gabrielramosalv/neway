@@ -31,10 +31,10 @@
 
 .profile__button{
     border-radius: var(--rounded-1);
-    padding: 15px 40px;
-    background-color: var(--color-grey-2);
+    padding: var(--ratio-1) 40px;
+    background-color: white;
+    border-color: var(--color-main-3);
     font-weight: 600;
-    border: none;
 }
 .profile__button:hover {
     background-color: var(--color-main-3); color: white;
@@ -71,18 +71,17 @@
 .profile__header__quatity__friends {
     border-radius: var(--rounded-1);
     padding: 15px 40px;
-    background-color: var(--color-grey-1);
 }
 
 .profile__header__quatity__post {
     border-radius: var(--rounded-1);
     padding: var(--ratio-1) 40px;
-    background-color: var(--color-grey-1);
+
 }
 
 .profile__header__quatity {
     font-weight: 600;
-    font-size: 17px;
+    font-size: 18px;
 }
 
 .profile__header__biografy {

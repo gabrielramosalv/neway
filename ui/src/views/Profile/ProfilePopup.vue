@@ -1,16 +1,16 @@
 <template>
-    <popup :header="false" ref="profilePopup">
+    <popup :header="true" ref="profilePopup">
         <template v-slot:content>
-            <div class="popup flex gap-1" >
-                <img class="popup__image" src="@/assets/img/wallpaper.jpg">
-                <div class="popup__interactions">
-                    <div class="popup__interactions__user flex align-i-center gap-1_2">
-                        <div class="popup__card__photo"></div>
-                        <h3 class="popup-card__name">joao:</h3>
-                        <span> texto de teste</span>
-                        <button @click="$refs.profilePopup.close()" class="popup__close"/>
+            <div class="popup" >
+                <div class="flex column">
+                    <img class="popup__image" src="@/assets/img/wallpaper.jpg">
+                    <div class="popup__interactions">
+                        <div class="popup__interactions__user flex align-i-center gap-1_2">
+                            <div class="popup__card__photo"></div>
+                            <h3 class="popup-card__name">joao:</h3>
+                            <span> texto de teste</span>
+                        </div>
                     </div>
-                    <div class="popup__border"></div>
                 </div>
             </div>
         </template>
@@ -26,22 +26,18 @@
 }
 
 .popup__interactions{
+    margin-top: 20px;
     height: auto;
     width: 400px;
-}
-
-.popup__border{
-    padding: 5px;
-    border-bottom: 1px solid var(--color-grey-2);
 }
 
 .popup__card__photo{
     border-radius: var(--rounded-2);
     padding: var(--ratio-1);
     width: 40px;
-    cursor: pointer;
     user-select: none;
     transition: transform 0.3s;
+
 }
 
 .popup-card__name {
@@ -55,21 +51,6 @@
     border-radius: var(--rounded-total);
     background: url("@/assets/img/joao.jpg") center no-repeat;
     background-size: 100%;
-}
-
-.popup__close {
-    height: 35px;
-    aspect-ratio: 1/1;
-    background: url("@/assets/img/close-icon.svg") center no-repeat transparent;
-    background-size: 100%;
-    border-radius: var(--rounded-total);
-    border: none;
-    cursor: pointer;
-    margin-left: auto;
-}
-
-.popup__close:hover {
-    background-color: var(--color-grey-1);
 }
 
 </style>

@@ -1,8 +1,6 @@
 <template>
     <article class="profilePost">
-        <ProfilePopup>
-
-        </ProfilePopup>
+        <ProfilePopup/>
     </article>
 </template>
 
