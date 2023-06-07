@@ -24,7 +24,6 @@ export default class extends Service<Post> {
     }
 
     public doLike(post: Post, user: User): boolean {
-        console.log(user);
         if (!user.likedPostIds.includes(post.id)) {
             post.likes += 1;
             super.save(post);

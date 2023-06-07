@@ -1,5 +1,5 @@
 <template>
-    <Popup :header="true" title="Criar publicação" ref="doPostPopup">
+    <Popup ref="doPostPopup" title="Criar publicação">
         <template v-slot:content>
             <div class="flex column gap-1 align-i-end">
                 <div class="flex column align-i-center gap-1 width-full">
@@ -10,7 +10,7 @@
                                @cancel="$event.preventDefault()" ref="imageInput"/>
                     </label>
                     <TextField type="textarea" class="do-post__text" placeholder="Escreva o texto do seu post..."
-                               v-model="text" :rows="rows"/>
+                               v-model="text" :rows="rows" maxlength="500"/>
                 </div>
                 <div class="flex justify-c-between align-i-center width-full">
                     <div class="do-post__put-image flex gap-1_2 align-i-center" @click="hasImage = !hasImage">
@@ -84,7 +84,7 @@ import {Post} from "@/services/post/Post";
 import {$system} from "@/global/system";
 import {Events} from "@/global/Events";
 
-const TEXT_ROWS_QUANTITY = 5;
+const TEXT_ROWS_QUANTITY = 10;
 
 export default {
     name: "DoPostPopup",
@@ -120,13 +120,13 @@ export default {
                     post.image = fr.result;
                     $system.services.post.save(post);
                     this.$refs.doPostPopup.close();
-                    this.$emit("new-post");
+                    this.$emit("post-action");
                 }
                 fr.readAsDataURL(image);
             } else {
                 $system.services.post.save(post);
                 this.$refs.doPostPopup.close();
-                this.$emit("new-post");
+                this.$emit("post-action");
             }
             this.$refs.image.src = this.loadImagePhoto;
             this.text = "";

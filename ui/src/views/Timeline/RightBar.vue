@@ -1,6 +1,6 @@
 <template>
     <nav class="right-bar flex column align-i-start gap-1">
-        <UserCard :user="user" ratio="50px" border-color="var(--color-main-1)"/>
+        <UserCard :user="currentUser" ratio="50px" border-color="var(--color-main-1)"/>
         <section class="flex column gap-1 width-full">
             <TextField type="search" placeholder="Procure pessoas no Neway" v-model="usersSearch"/>
             <div class="right-bar__friends-list flex column">
@@ -50,7 +50,7 @@ export default {
         return {
             usersSearch: "",
             users: [],
-            user: User
+            currentUser: new User()
         }
     },
     mounted() {
@@ -58,12 +58,12 @@ export default {
         if (user == null) {
             return;
         }
-        this.user = user;
-        this.users = $system.services.user.getAllUnlessThisUser(this.user);
+        this.currentUser = user;
+        this.users = $system.services.user.getAllUnlessThisUser(this.currentUser);
     },
     watch: {
         usersSearch(newValue) {
-            this.users = $system.services.user.getAllByNameOrNicknameUnlessThisUser(newValue, this.user);
+            this.users = $system.services.user.getAllByNameOrNicknameUnlessThisUser(newValue, this.currentUser);
         }
     },
     components: {TextField, UserCard}

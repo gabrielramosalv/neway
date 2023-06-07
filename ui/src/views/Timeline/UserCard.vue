@@ -3,8 +3,8 @@
         <div class="flex align-i-center gap-1_2">
             <div class="user-card__photo"></div>
             <div class="flex column align-i-start">
-                <h4 class="user-card__name">{{ resumedName }}</h4>
-                <span class="user-card__nickname">{{ user.nickname }}</span>
+                <h4 class="user-card__name bold" :style="isFollowed ? 'width: 100px': ''">{{ resumedName }}</h4>
+                <span class="user-card__nickname" :style="isFollowed ? 'width: 100px': ''">{{ user.nickname }}</span>
             </div>
         </div>
         <span v-if="isFollowed" class="user-card__followed bold minor">Seguindo</span>
@@ -27,9 +27,7 @@
     transform: scale(0.97);
 }
 
-.user-card__name {
-    font-size: 1em;
-    font-weight: 600;
+.user-card__name, .user-card__nickname {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -37,9 +35,6 @@
 
 .user-card__nickname {
     color: var(--color-text-aside-1);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .user-card:hover {
@@ -50,9 +45,10 @@
     height: v-bind(ratio);
     aspect-ratio: 1/1;
     border-radius: var(--rounded-total);
-    background: url("@/assets/img/joao.jpg") center no-repeat;
-    background-size: 100%;
+    background: url("@/assets/img/user-default-photo.svg") center no-repeat var(--color-grey-1);
+    background-size: 50%;
 }
+
 
 .user-card__followed {
     color: var(--color-main-1);
@@ -80,7 +76,7 @@ export default {
     computed: {
         resumedName() {
             return this.user.name.substring(0, this.user.name.indexOf(" ")) +
-                this.user.name.substring(this.user.name.lastIndexOf(" "));
+                this.user.name.substring(this.user.name.lastIndexOf(" "), this.user.name.length);
         },
         profileLink() {
             return "@" + this.user.nickname;

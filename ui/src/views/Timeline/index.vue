@@ -1,13 +1,13 @@
 <template>
     <div class="timeline">
         <main class="timeline__main flex justify-c-center gap-2">
-            <LeftBar @message="$emit('message', $event)" @new-post="loadPosts"/>
+            <LeftBar @message="$emit('message', $event)" @post-action="loadPosts"/>
             <section class="timeline__main__posts flex row align-i-start justify-c-center gap-2">
                 <div class="flex column gap-2">
                     <TimelinePost v-for="post in posts"
-                          :user="getUserFromPost(post)"
-                          :post="post"
-                          :key="post.id"/>
+                                  :user="getUserFromPost(post)"
+                                  :post="post"
+                                  :key="post.id" @post-action="loadPosts"/>
                 </div>
             </section>
             <RightBar/>
@@ -50,7 +50,7 @@ export default {
     components: {RightBar, LeftBar, TimelinePost},
     data() {
         return {
-            user: null,
+            user: new User(),
             posts: [],
             users: []
         }

@@ -17,22 +17,8 @@
                 </button>
             </div>
 
-            <div class="interactions__posts width-full" v-if="activeTab === 1"
-                 :class="{'flex justify-c-center': likedPosts.length === 0}">
-                <div v-if="likedPosts.length > 0">
-                    <post v-for="post in likedPosts" :key="post.id"
-                          :post="post" :user="user" width="100%" height="100%"/>
-                </div>
-                <h4 v-else class="aside title">Não temos nada por aqui :/</h4>
-            </div>
-            <div class="interactions__posts width-full" v-if="activeTab === 2"
-                 :class="{'flex justify-c-center': likedPosts.length === 0}">
-                <div v-if="likedPosts.length > 0">
-                    <post v-for="post in savedPosts" :key="post.id"
-                          :post="post" :user="user"/>
-                </div>
-                <h4 v-else class="aside title">Não temos nada por aqui :/</h4>
-            </div>
+            <PostsContainer :posts="likedPosts" v-if="activeTab === 1"/>
+            <PostsContainer :posts="savedPosts" v-if="activeTab === 2"/>
         </div>
     </div>
 </template>
@@ -76,15 +62,15 @@
 
 <script>
 import LeftBar from "@/components/layout/LeftBar.vue";
-import Post from "@/components/Post.vue";
 import {$system} from "@/global/system";
 import router from "@/router";
 import {Paths} from "@/router/routes";
 import {User} from "@/services/user/User";
+import PostsContainer from "@/components/PostsContainer.vue";
 
 export default {
     name: "Interactions",
-    components: {Post, LeftBar},
+    components: {PostsContainer, LeftBar},
     data() {
         return {
             activeTab: 1,

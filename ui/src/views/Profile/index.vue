@@ -1,13 +1,13 @@
 <template>
     <div class="flex">
-        <LeftBar/>
+        <LeftBar @message="$emit('message', $event)" @post-action="loadPosts"/>
         <div class="profile flex column align-i-center gap-2">
             <div class="profile__header flex align-i-center width-full">
                 <article class="profile__user-card flex align-i-center gap-2">
                     <div class="profile__user-card__photo"></div>
                     <div class="flex column align-i-start gap-1">
                         <h2 class="title">
-                            <span class="aside">@ </span>
+                            <span class="main">@ </span>
                             <span>{{ profileUser.nickname }}</span>
                         </h2>
                         <div class="flex column" :class="{'gap-1_2': isProfileFromLoggedUser}">
@@ -28,12 +28,12 @@
                 <div class="headline flex column align-i-center gap-2 width-full">
                     <div class="flex align-i-center justify-c-center gap-2">
                         <span class="flex gap-1_2">
+                            <span>Seguindo</span>
                             <span class="main">{{ followingQuantity }}</span>
-                            <span>seguidores</span>
                         </span>
                         <span class="flex gap-1_2">
+                            <span>Publicações</span>
                             <span class="main">{{ posts.length }}</span>
-                            <span>publicações</span>
                         </span>
                     </div>
                     <Button
@@ -47,7 +47,7 @@
                     />
                 </div>
             </div>
-            <PostsContainer :posts="posts"/>
+            <PostsContainer :posts="posts" @post-action="loadPosts"/>
         </div>
     </div>
 </template>
@@ -78,8 +78,8 @@
     height: 250px;
     aspect-ratio: 1/1;
     border-radius: var(--rounded-total);
-    background: url("@/assets/img/joao.jpg") center no-repeat;
-    background-size: 100%;
+    background: url("@/assets/img/user-default-photo.svg") center no-repeat var(--color-grey-1);
+    background-size: 50%;
 }
 
 .profile__header {
@@ -114,6 +114,16 @@ export default {
             posts: []
         }
     },
+    watch: {
+        "profileUser.bibliography"(newValue) {
+            this.profileUser.bibliography = newValue;
+            $system.services.user.save(this.profileUser);
+        },
+        "profileUser.name"(newValue) {
+            this.profileUser.name = newValue;
+            $system.services.user.save(this.profileUser);
+        }
+    },
     mounted() {
         const user = $system.getUser();
         if (user == null) {
@@ -133,6 +143,11 @@ export default {
     methods: {
         follow() {
             this.isFollowed = $system.services.user.doFollow(this.user, this.profileUser);
+        },
+        loadPosts() {
+            if (this.profileUser.id === this.user.id) {
+                this.posts = $system.services.post.getAllByUser(this.user);
+            }
         }
     },
     computed: {

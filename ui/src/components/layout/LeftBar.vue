@@ -14,7 +14,7 @@
             <button class="left-bar__button publish flex align-i-center gap-1 width-full">
                 <span class="left-bar__button__image"></span>
                 <span>Publicar</span>
-                <DoPostPopup :user="user" @message="$emit('message', $event)" @new-post="$emit('new-post')"/>
+                <DoPostPopup :user="user" @message="$emit('message', $event)" @post-action="$emit('post-action')"/>
             </button>
             <button class="left-bar__button exit flex align-i-center gap-1 width-full" @click="exit">
                 <span class="left-bar__button__image"></span>

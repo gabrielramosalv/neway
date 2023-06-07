@@ -21,7 +21,7 @@ export class User extends Entity {
 
     public followIds: Array<number>;
 
-    constructor(nickname: string | null = null, firstName: string | null = null, password: string | null = null) {
+    constructor(nickname: string | null = "", firstName: string | null = "", password: string | null = "") {
         super(0);
         this.nickname = nickname;
         this.name = firstName;

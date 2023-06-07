@@ -1,7 +1,7 @@
 <template>
     <div class="posts-container width-full" :class=" {'flex justify-c-center': posts.length === 0}"
          :style="templateColumns">
-        <post v-for="post in posts" :key="post.id" :post="post" width="100%" height="100%"/>
+        <post v-for="post in posts" :key="post.id" :post="post" width="100%" height="100%" @post-action="$emit('post-action')"/>
         <h4 v-if="posts.length === 0" class="aside title">Não temos nada por aqui :/</h4>
     </div>
 </template>

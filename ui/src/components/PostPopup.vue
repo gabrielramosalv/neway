@@ -1,15 +1,22 @@
 <template>
-    <popup :header="true" ref="profilePopup">
+    <popup :header="!hasImage">
         <template v-slot:content>
-            <div class="post-popup">
-                <div class="flex column">
-                    <img v-if="hasImage" class="post-popup__image" :src="post.image" alt="post-image">
-                    <div class="post-popup__interactions">
-                        <div class="post-popup__interactions__user flex align-i-center gap-1_2">
-                            <div class="post-popup__card__photo"></div>
-                            <h3 class="post-popup-card__name t-w-bold">{{ user.nickname }}</h3>
-                            <span>{{ post.text }}</span>
+            <div class="post-popup flex height-full gap-1">
+                <img v-if="hasImage" class="post-popup__image" :src="post.image" alt="post-image">
+                <div class="flex column gap-1 justify-c-between">
+                    <div class="flex column gap-1">
+                        <div class="flex align-i-center justify-c-between">
+                            <div class="flex gap-1_2 align-i-center">
+                                <div class="post-popup__content__photo"></div>
+                                <span class="bold">{{ user.nickname }}</span>
+                            </div>
+
                         </div>
+                        <p class="post-popup__content__text bold headline">{{ post.text }}</p>
+                    </div>
+                    <div class="post-popup__content__interactions flex align-i-center justify-c-between width-full">
+                        <span class="aside minor">{{ post.getDateString() }}</span>
+                        <PostInteractions :post="post"/>
                     </div>
                 </div>
             </div>
@@ -20,36 +27,45 @@
 
 <style scoped>
 
+.post-popup {
+    height: 600px;
+}
+
 .post-popup__image {
-    height: 500px;
-    width: 900px;
+    object-fit: contain;
+    max-width: 700px;
+    background-color: var(--color-grey-1);
+    border-radius: var(--rounded-1);
 }
 
-.post-popup__interactions {
-    margin-top: 20px;
-    height: auto;
-    width: 400px;
+.post-popup__content__interactions {
+    border-top: var(--trace);
+    padding-top: 5px;
 }
 
-.post-popup__card__photo {
+.post-popup__content__interactions > div {
+    margin: 0;
+}
+
+.post-popup__content__photo {
     border-radius: var(--rounded-2);
     padding: var(--ratio-1);
     width: 40px;
     user-select: none;
     transition: transform 0.3s;
-
 }
 
-.post-popup-card__name {
-    font-size: 1em;
-}
-
-.post-popup__card__photo {
+.post-popup__content__photo {
     height: v-bind(ratio);
     aspect-ratio: 1/1;
     border-radius: var(--rounded-total);
-    background: url("@/assets/img/joao.jpg") center no-repeat;
-    background-size: 100%;
+    background: url("@/assets/img/user-default-photo.svg") center no-repeat var(--color-grey-1);
+    background-size: 50%;
+}
+
+.post-popup__content__text {
+    white-space: break-spaces;
+    width: 400px;
 }
 
 </style>
@@ -57,13 +73,19 @@
 import Popup from "@/components/base/Popup.vue";
 import {Post} from "@/services/post/Post";
 import {User} from "@/services/user/User";
+import PostInteractions from "@/components/PostInteractions.vue";
 
 export default {
     name: "PostPopup",
-    components: {Popup},
+    components: {PostInteractions, Popup},
     props: {
         post: Post,
         user: User
+    },
+    data() {
+        return {
+            currentUser: null
+        }
     },
     computed: {
         hasImage() {

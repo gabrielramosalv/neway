@@ -6,7 +6,7 @@
             </p>
         </div>
         <img v-else class="post__image width-full height-full" :src="post.image" alt="post-image"/>
-        <PostPopup :post="post" :user="user"/>
+        <PostPopup :post="post" :user="postUser" @post-action="$emit('post-action')"/>
     </article>
 </template>
 
@@ -21,7 +21,7 @@
 }
 
 .post:hover {
-    transform: scale(1.02);
+    transform: scale(1.01);
 }
 
 .post__text {
@@ -29,8 +29,14 @@
     border-radius: var(--rounded-2);
     padding: var(--ratio-1);
     overflow: hidden;
+    background-color: var(--color-main-1);
+}
+
+.post__text > p {
+    overflow: hidden;
     text-overflow: ellipsis;
-    position: relative;
+    white-space: break-spaces;
+    color: white;
 }
 
 .post__image {
@@ -57,15 +63,23 @@ export default {
         width: {
             default: "inherit",
             type: String
+        },
+        user: {
+            default: null,
+            type: User
         }
     },
     data() {
         return {
-            user: new User()
+            postUser: new User()
         }
     },
     mounted() {
-        this.user = $system.services.user.getOne(this.post.userId);
+        if (this.user == null) {
+            this.postUser = $system.services.user.getOne(this.post.userId);
+        } else {
+            this.postUser = this.user;
+        }
     },
     computed: {
         hasImage() {

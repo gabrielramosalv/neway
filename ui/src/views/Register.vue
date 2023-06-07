@@ -6,7 +6,7 @@
                 <TextField type="text" placeholder="Primeiro nome" v-model="firstName"
                            :formatter="User.nameFormatter"/>
                 <TextField type="text" placeholder="Apelido" v-model="nickname"
-                           :formatter="User.nicknameFormatter"/>
+                           :formatter="User.nicknameFormatter" maxlength="15"/>
                 <TextField type="password" placeholder="Senha" v-model="password"/>
                 <TextField type="password" placeholder="Repetir senha" v-model="repeatPassword"/>
             </div>

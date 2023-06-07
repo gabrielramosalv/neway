@@ -16,6 +16,7 @@ export default class extends Service<User> {
         storedEntity.savedPostIds = entity.savedPostIds;
         storedEntity.likedPostIds = entity.likedPostIds;
         storedEntity.followIds = entity.followIds;
+        storedEntity.bibliography = entity.bibliography;
     }
 
     protected assign(entity: User): void {
