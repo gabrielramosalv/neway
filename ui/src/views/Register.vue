@@ -4,16 +4,16 @@
             <h1 class="register-container__title">Neway</h1>
             <div class="flex column gap-1">
                 <TextField type="text" placeholder="Primeiro nome" v-model="firstName"
-                           v-bind:formatter="User.nameFormatter"/>
+                           :formatter="User.nameFormatter"/>
                 <TextField type="text" placeholder="Apelido" v-model="nickname"
-                           v-bind:formatter="User.nicknameFormatter"/>
+                           :formatter="User.nicknameFormatter"/>
                 <TextField type="password" placeholder="Senha" v-model="password"/>
                 <TextField type="password" placeholder="Repetir senha" v-model="repeatPassword"/>
             </div>
             <div class="flex column gap-1">
                 <Button content="Cadastrar" class="width-full" @click="register"/>
                 <hr class="line">
-                <Button content="Voltar" class="width-full" border="2px solid var(--color-main-1)"
+                <Button content="Voltar" class="width-full" border="1px solid var(--color-main-1)"
                         bg-color="transparent" text-color="var(--color-main-1)" to="/login"/>
             </div>
         </div>

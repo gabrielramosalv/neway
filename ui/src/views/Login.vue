@@ -3,7 +3,7 @@
         <div class="login-container flex column gap-2">
             <h1 class="login-container__title">Neway</h1>
             <div class="flex column gap-1">
-                <TextField type="text" placeholder="Apelido" v-bind:formatter="User.nicknameFormatter"
+                <TextField type="text" placeholder="Apelido" :formatter="User.nicknameFormatter"
                            v-model="nickname"/>
                 <TextField type="password" placeholder="Senha" v-model="password"/>
             </div>

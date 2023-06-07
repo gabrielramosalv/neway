@@ -1,10 +1,10 @@
 <template>
     <nav class="right-bar flex column align-i-start gap-1">
-        <UserCard v-bind:user="user" ratio="50px" border-color="var(--color-main-1)"/>
+        <UserCard :user="user" ratio="50px" border-color="var(--color-main-1)"/>
         <section class="flex column gap-1 width-full">
             <TextField type="search" placeholder="Procure pessoas no Neway" v-model="usersSearch"/>
             <div class="right-bar__friends-list flex column">
-                <UserCard v-for="user in users" v-bind:user="user" v-bind:key="user.id"/>
+                <UserCard v-for="user in users" :user="user" :key="user.id"/>
                 <div class="right-bar__friends-list__fade"></div>
             </div>
         </section>

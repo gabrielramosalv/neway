@@ -1,8 +1,8 @@
 <template>
-    <input v-bind:type="type" class="text-field input" v-bind:placeholder="placeholder" v-if="type !==
-    'textarea'" v-bind:maxlength="maxlength" spellcheck="false" @input="change" v-bind:value="modelValue">
-    <textarea class="text-field textarea" v-bind:placeholder="placeholder" v-else :rows="rows"
-              v-bind:maxlength="maxlength" spellcheck="false" v-bind:value="modelValue" @input="change"></textarea>
+    <input :type="type" class="text-field input" :placeholder="placeholder" v-if="type !==
+    'textarea'" :maxlength="maxlength" spellcheck="false" @input="change" :value="modelValue" :readonly="readyonly">
+    <textarea class="text-field textarea" :placeholder="placeholder" v-else :rows="rows"
+              :maxlength="maxlength" spellcheck="false" :value="modelValue" @input="change" :readonly="readyonly"></textarea>
 </template>
 
 <style scoped>
@@ -16,7 +16,7 @@
 }
 
 .text-field:focus {
-    box-shadow: 0 0 0 1px var(--color-main-transparent-1);
+    box-shadow: v-bind(focus);
 }
 
 .text-field.input {
@@ -61,12 +61,21 @@ export default {
                 return text;
             },
             type: Function
+        },
+        readyonly: {
+            default: false,
+            type: Boolean
         }
     },
     methods: {
         change(event) {
             event.target.value = this.formatter(event.target.value);
             this.$emit('update:modelValue', event.target.value);
+        }
+    },
+    computed: {
+        focus() {
+            return this.readyonly ? "none" : "0 0 0 1px var(--color-main-transparent-1)";
         }
     }
 }

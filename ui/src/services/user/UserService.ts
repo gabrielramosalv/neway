@@ -15,6 +15,7 @@ export default class extends Service<User> {
         storedEntity.password = entity.password;
         storedEntity.savedPostIds = entity.savedPostIds;
         storedEntity.likedPostIds = entity.likedPostIds;
+        storedEntity.followIds = entity.followIds;
     }
 
     protected assign(entity: User): void {
@@ -43,10 +44,12 @@ export default class extends Service<User> {
         if (!user.followIds.includes(followed.id)) {
             user.followIds.push(followed.id);
             super.save(user);
+            $system.setUser(user);
             return true;
         } else {
             user.followIds.splice(user.followIds.indexOf(followed.id), 1);
             super.save(user);
+            $system.setUser(user);
             return false;
         }
     }

@@ -19,8 +19,8 @@ export default class extends Service<Post> {
         Object.setPrototypeOf(entity, Post.prototype);
     }
 
-    public getByUser(user: User): Array<Post> {
-        return super.getAll().filter(post => post.userId == user.id);
+    public getAllByUser(user: User): Array<Post> {
+        return this.getAllSortByRecent().filter(post => post.userId == user.id);
     }
 
     public doLike(post: Post, user: User): boolean {

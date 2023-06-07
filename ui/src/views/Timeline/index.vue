@@ -5,9 +5,9 @@
             <section class="timeline__main__posts flex row align-i-start justify-c-center gap-2">
                 <div class="flex column gap-2">
                     <TimelinePost v-for="post in posts"
-                          v-bind:user="getUserFromPost(post)"
-                          v-bind:post="post"
-                          v-bind:key="post.id"/>
+                          :user="getUserFromPost(post)"
+                          :post="post"
+                          :key="post.id"/>
                 </div>
             </section>
             <RightBar/>
@@ -50,7 +50,7 @@ export default {
     components: {RightBar, LeftBar, TimelinePost},
     data() {
         return {
-            user: User,
+            user: null,
             posts: [],
             users: []
         }

@@ -1,8 +1,8 @@
 <template>
     <div class="message-box flex column gap-1">
-        <ResponseMessage v-for="(message, index) in messages" v-bind:type="message.type"
-                         v-bind:message="message.message"
-                         v-bind:key="index"/>
+        <ResponseMessage v-for="(message, index) in messages" :type="message.type"
+                         :message="message.message"
+                         :key="index"/>
     </div>
 </template>
 

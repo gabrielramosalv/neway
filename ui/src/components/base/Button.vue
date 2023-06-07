@@ -1,5 +1,5 @@
 <template>
-    <router-link v-bind:to="to" v-if="to != null" class="button bold flex all-center">
+    <router-link :to="to" v-if="to != null" class="button bold flex all-center">
         {{ content }}
     </router-link>
     <button class="button bold" v-else>
@@ -52,7 +52,7 @@ export default {
         },
         border: {
             type: String,
-            default: "none"
+            default: "var(--trace)"
         },
         textColor: {
             type: String,

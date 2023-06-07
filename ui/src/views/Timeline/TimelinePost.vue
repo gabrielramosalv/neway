@@ -2,7 +2,7 @@
     <article class="post flex column gap-1">
         <header class="post__header flex justify-c-between align-i-center width-full">
             <div class="flex align-i-center gap-1">
-                <router-link v-bind:to="getProfileByNickname()">
+                <router-link :to="getProfileByNickname()">
                     <div class="post__header__user__photo pointer"></div>
                 </router-link>
                 <span class="post__header__user__name no-select">{{ user.nickname }}</span>
@@ -10,11 +10,11 @@
             <span class="minor aside no-select">{{ this.getDateString }}</span>
         </header>
 
-        <img class="post__content" alt="photo" v-if="hasImage" v-bind:src="post.image"/>
+        <img class="post__content" alt="photo" v-if="hasImage" :src="post.image"/>
 
-        <div v-bind:class="['post__bottom flex align-i-center justify-c-between width-full', !hasImage ? 'column'
+        <div :class="['post__bottom flex align-i-center justify-c-between width-full', !hasImage ? 'column'
          : 'gap-1']">
-            <p v-bind:class="['post__bottom__text align-s-start no-select', hasImage ? 'caption' : 'content']">
+            <p :class="['post__bottom__text align-s-start no-select', hasImage ? 'caption' : 'content']">
                 {{ post.text }}
             </p>
             <hr v-if="!hasImage" class="post__separator">
@@ -146,7 +146,6 @@ export default {
     },
     data() {
         return {
-            currentUser: new User(),
             alreadyLiked: false,
             alreadySaved: false,
             hangLooseSvg: require('@/assets/img/hang-loose-interacted-icon.svg'),
@@ -156,11 +155,14 @@ export default {
         }
     },
     mounted() {
-        this.currentUser = $system.getUser();
-        if (this.currentUser.likedPostIds.includes(this.post.id)) {
+        const currentUser = $system.getUser();
+        if (currentUser == null) {
+            return;
+        }
+        if (currentUser.likedPostIds.includes(this.post.id)) {
             this.alreadyLiked = true;
         }
-        if (this.currentUser.savedPostIds.includes(this.post.id)) {
+        if (currentUser.savedPostIds.includes(this.post.id)) {
             this.alreadySaved = true;
         }
     },

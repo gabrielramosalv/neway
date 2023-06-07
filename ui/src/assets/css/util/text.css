@@ -27,3 +27,7 @@
 .aside {
     color: var(--color-text-aside-1);
 }
+
+.main {
+    color: var(--color-main-1);
+}

@@ -20,16 +20,16 @@
             <div class="interactions__posts width-full" v-if="activeTab === 1"
                  :class="{'flex justify-c-center': likedPosts.length === 0}">
                 <div v-if="likedPosts.length > 0">
-                    <interactions-post v-for="post in likedPosts" :key="post.id"
-                                       :post="post"/>
+                    <post v-for="post in likedPosts" :key="post.id"
+                          :post="post" :user="user" width="100%" height="100%"/>
                 </div>
                 <h4 v-else class="aside title">Não temos nada por aqui :/</h4>
             </div>
             <div class="interactions__posts width-full" v-if="activeTab === 2"
                  :class="{'flex justify-c-center': likedPosts.length === 0}">
                 <div v-if="likedPosts.length > 0">
-                    <interactions-post v-for="post in savedPosts" :key="post.id"
-                                       :post="post"/>
+                    <post v-for="post in savedPosts" :key="post.id"
+                          :post="post" :user="user"/>
                 </div>
                 <h4 v-else class="aside title">Não temos nada por aqui :/</h4>
             </div>
@@ -76,19 +76,21 @@
 
 <script>
 import LeftBar from "@/components/layout/LeftBar.vue";
-import InteractionsPost from "@/views/Interactions/InteractionsPost.vue";
+import Post from "@/components/Post.vue";
 import {$system} from "@/global/system";
 import router from "@/router";
 import {Paths} from "@/router/routes";
+import {User} from "@/services/user/User";
 
 export default {
     name: "Interactions",
-    components: {InteractionsPost, LeftBar},
+    components: {Post, LeftBar},
     data() {
         return {
             activeTab: 1,
             likedPosts: [],
-            savedPosts: []
+            savedPosts: [],
+            user: new User()
         }
     },
     mounted() {
@@ -97,6 +99,7 @@ export default {
             router.push(Paths.LOGIN);
             return;
         }
+        this.user = user;
         this.likedPosts = $system.services.post.getAllLikedByUser(user);
         this.savedPosts = $system.services.post.getAllSavedByUser(user);
     }

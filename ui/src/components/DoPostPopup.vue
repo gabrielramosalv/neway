@@ -3,15 +3,14 @@
         <template v-slot:content>
             <div class="flex column gap-1 align-i-end">
                 <div class="flex column align-i-center gap-1 width-full">
-                    <label class="do-post__input-image flex all-center"
-                           for="post-image" v-show="hasImage">
+                    <label class="do-post__input-image flex all-center" for="post-image" :class="{'none': !hasImage}">
                         <img ref="image" class="do-post__image width-full height-full"
                              :src="loadImagePhoto" alt="post-image"/>
                         <input type="file" accept="image/*" id="post-image" @input="loadImage"
                                @cancel="$event.preventDefault()" ref="imageInput"/>
                     </label>
                     <TextField type="textarea" class="do-post__text" placeholder="Escreva o texto do seu post..."
-                               v-model="text" v-bind:rows="rows"/>
+                               v-model="text" :rows="rows"/>
                 </div>
                 <div class="flex justify-c-between align-i-center width-full">
                     <div class="do-post__put-image flex gap-1_2 align-i-center" @click="hasImage = !hasImage">
@@ -103,6 +102,7 @@ export default {
     },
     watch: {
         hasImage(hasImage) {
+            this.$refs.imageInput.value = "";
             this.rows = hasImage ? 2 : TEXT_ROWS_QUANTITY;
         }
     },

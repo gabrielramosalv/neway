@@ -26,7 +26,7 @@ export class User extends Entity {
         this.nickname = nickname;
         this.name = firstName;
         this.password = password;
-        this.bibliography = null;
+        this.bibliography = "";
         this.photo = null;
         this.likedPostIds = [];
         this.savedPostIds = [];

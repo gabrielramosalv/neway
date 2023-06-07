@@ -6,14 +6,15 @@
                 <span class="left-bar__button__image"></span>
                 <span>Início</span>
             </router-link>
-            <router-link class="left-bar__button flex align-i-center gap-1 width-full" :to="Paths.INTERACTIONS">
+            <router-link class="left-bar__button interaction flex align-i-center gap-1 width-full"
+                         :to="Paths.INTERACTIONS">
                 <span class="left-bar__button__image"></span>
                 <span>Interações</span>
             </router-link>
             <button class="left-bar__button publish flex align-i-center gap-1 width-full">
                 <span class="left-bar__button__image"></span>
                 <span>Publicar</span>
-                <DoPostPopup v-bind:user="user" @message="$emit('message', $event)" @new-post="$emit('new-post')"/>
+                <DoPostPopup :user="user" @message="$emit('message', $event)" @new-post="$emit('new-post')"/>
             </button>
             <button class="left-bar__button exit flex align-i-center gap-1 width-full" @click="exit">
                 <span class="left-bar__button__image"></span>
@@ -68,12 +69,17 @@
     color: var(--color-red-1);
 }
 
+.left-bar__button.interaction > .left-bar__button__image {
+    background-image: url("@/assets/img/interactions-icon.svg");
+}
+
 .left-bar__button.exit > .left-bar__button__image {
     background-image: url("@/assets/img/exit-icon.svg");
 }
 
 .left-bar__button.home > .left-bar__button__image {
     background-image: url("@/assets/img/home-icon.svg");
+    width: 23px;
 }
 
 .left-bar__button.publish > .left-bar__button__image {
@@ -92,16 +98,18 @@ import router from "@/router";
 
 export default {
     name: "LeftBar",
-    computed: {
-        Paths() {
-            return Paths
-        }
-    },
     components: {DoPostPopup},
     data() {
         return {
             user: User
         }
+    },
+    mounted() {
+        const user = $system.getUser();
+        if (user == null) {
+            return;
+        }
+        this.user = user;
     },
     methods: {
         exit() {
@@ -109,8 +117,10 @@ export default {
             router.push(Paths.LOGIN);
         }
     },
-    mounted() {
-        this.user = $system.getUser();
+    computed: {
+        Paths() {
+            return Paths
+        }
     }
 }
 </script>
